@@ -16,11 +16,15 @@ class TdTest extends TestCase
         $td = new Td('John Doe');
 
         $this->assertSame($td->createElement()->getInnerHtml(), 'John Doe');
+        $this->assertSame($td->render(), '<td>John Doe</td>');
     }
 
     public function testTdHtmlStringRender(): void
     {
         $td = new Td('<p>James Blunt</p>');
+
+        $this->assertSame($td->createElement()->getInnerHtml(), '<p>James Blunt</p>');
+        $this->assertSame($td->render(), '<td><p>James Blunt</p></td>');
     }
 
     public function testTdNodeInterfaceRender(): void
@@ -32,12 +36,15 @@ class TdTest extends TestCase
         $node->appendChild(new TextNode('Working Logic'));
         
         $td = new Td($node);
+
+        $this->assertSame($td->createElement()->getInnerHtml(), $node->render());
+        $this->assertSame($td->render(), '<td><div id="example">Working Logic</div></td>');
     }
 
     public function testTdInnerTableRender(): void
     {
-        $table = new Table();
+        $td = new Td(new Td('Slim'));
 
-        $td = new Td($table);
+        $this->assertSame($td->render(), '<td><td>Slim</td></td>');
     }
 }
