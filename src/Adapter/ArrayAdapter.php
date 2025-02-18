@@ -6,5 +6,4 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
 
 class ArrayAdapter implements AdapterInterface
 {
-
 }

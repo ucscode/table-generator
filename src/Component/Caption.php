@@ -2,20 +2,17 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableFragmentTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\ValueTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class Caption implements TableComponentInterface, RenderableInterface
+class Caption implements TableElementInterface
 {
-    use TableFragmentTrait;
+    use TableElementTrait;
     use ValueTrait;
-    use RenderableTrait;
 
     public function __construct()
     {

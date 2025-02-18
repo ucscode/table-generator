@@ -2,17 +2,15 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableFragmentTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class Col implements RenderableInterface
+class Col implements TableElementInterface
 {
-    use TableFragmentTrait;
-    use RenderableTrait;
+    use TableElementTrait;
 
     public function __construct()
     {

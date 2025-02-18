@@ -9,17 +9,15 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Component\ColGroup;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableFragmentTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class Table implements RenderableInterface
+class Table implements TableElementInterface
 {
-    use TableFragmentTrait;
-    use RenderableTrait;
+    use TableElementTrait;
 
     protected ?Caption $caption = null;
     protected ColGroupCollection $colGroupCollection;

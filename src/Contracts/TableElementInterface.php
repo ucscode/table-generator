@@ -2,6 +2,6 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
 
-interface TableComponentInterface
+interface TableElementInterface extends RenderableInterface
 {
 }

@@ -8,6 +8,6 @@ class HtmlTableGenerator
 
     public function __construct()
     {
-        
+
     }
 }
