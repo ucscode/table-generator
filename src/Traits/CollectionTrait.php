@@ -29,7 +29,7 @@ trait CollectionTrait
     public function sort(callable $callback): static
     {
         usort($this->items, $callback);
-        
+
         return $this;
     }
 }

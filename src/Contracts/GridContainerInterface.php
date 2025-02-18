@@ -6,5 +6,4 @@ use Ucscode\UssElement\Contracts\CollectionInterface;
 
 interface GridContainerInterface extends TableComponentInterface, CollectionInterface
 {
-
 }

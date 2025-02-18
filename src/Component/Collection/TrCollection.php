@@ -1,11 +1,15 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
+namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Collection;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
+use Ucscode\UssElement\Contracts\CollectionInterface;
 
-trait TrTrait
+class TrCollection implements CollectionInterface
 {
+    use CollectionTrait;
+
     /**
      * Table rows
      *
@@ -13,24 +17,24 @@ trait TrTrait
      */
     protected array $items = [];
 
-    public function addTr(Tr $tr): static
+    public function add(Tr $tr): static
     {
         $this->items[] = $tr;
 
         return $this;
     }
 
-    public function getTr(int $index): ?Tr
+    public function get(int $index): ?Tr
     {
         return $this->items[$index] ?? null;
     }
 
-    public function hasTr(Tr $tr): bool
+    public function has(Tr $tr): bool
     {
         return in_array($tr, $this->items, true);
     }
 
-    public function removeTr(Tr|int $indexOrTr): static
+    public function remove(Tr|int $indexOrTr): static
     {
         if ($indexOrTr instanceof Tr) {
             $indexOrTr = $this->indexOf($indexOrTr);

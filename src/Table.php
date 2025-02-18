@@ -60,16 +60,16 @@ class Table
         return $this->colGroupCollection->get($index);
     }
 
+    public function hasColGroup(ColGroup $colGroup): bool
+    {
+        return $this->colGroupCollection->has($colGroup);
+    }
+
     public function removeColGroup(int|ColGroup $indexOrcolGroup): static
     {
         $this->colGroupCollection->remove($indexOrcolGroup);
 
         return $this;
-    }
-
-    public function hasColGroup(ColGroup $colGroup): bool
-    {
-        return $this->colGroupCollection->has($colGroup);
     }
 
     public function setThead(Thead $thead): static
@@ -120,15 +120,15 @@ class Table
         return $this->tbodyCollection->get($index);
     }
 
+    public function hasTbody(Tbody $tbody): bool
+    {
+        return $this->tbodyCollection->has($tbody);
+    }
+
     public function removeTbody(int|Tbody $indexOrTbody): static
     {
         $this->tbodyCollection->remove($indexOrTbody);
 
         return $this;
     }
-
-    public function hasTbody(Tbody $tbody): bool
-    {
-        return $this->tbodyCollection->has($tbody);
-    }
-} 
+}

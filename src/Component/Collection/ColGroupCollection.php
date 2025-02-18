@@ -10,34 +10,33 @@ class ColGroupCollection implements CollectionInterface
 {
     use CollectionTrait;
 
-    public function add(ColGroup  $colGroup): static
+    public function add(ColGroup $colGroup): static
     {
         $this->items[] = $colGroup;
 
         return $this;
     }
 
-    public function get(int $index): ?ColGroup 
+    public function get(int $index): ?ColGroup
     {
         return $this->items[$index] ?? null;
     }
 
-    public function has(ColGroup  $colGroup): bool
+    public function has(ColGroup $colGroup): bool
     {
         return in_array($colGroup, $this->items, true);
     }
 
-    public function remove(ColGroup |int $indexOrcolGroup): static
+    public function remove(ColGroup|int $indexOrColGroup): static
     {
-        if ($indexOrcolGroup instanceof ColGroup) {
-            $indexOrcolGroup = $this->indexOf($indexOrcolGroup);
+        if ($indexOrColGroup instanceof ColGroup) {
+            $indexOrColGroup = $this->indexOf($indexOrColGroup);
         }
 
-        if ($indexOrcolGroup !== false) {
+        if ($indexOrColGroup !== false) {
             /** @var int $indexOrTr */
-            if (array_key_exists($indexOrcolGroup, $this->items)) {
-                unset($this->items[$indexOrcolGroup]);
-                
+            if (array_key_exists($indexOrColGroup, $this->items)) {
+                unset($this->items[$indexOrColGroup]);
                 $this->items = array_values($this->items);
             }
         }
@@ -45,7 +44,7 @@ class ColGroupCollection implements CollectionInterface
         return $this;
     }
 
-    public function indexOf(ColGroup  $colGroup): int|bool
+    public function indexOf(ColGroup $colGroup): int|bool
     {
         return array_search($colGroup, $this->items, true);
     }

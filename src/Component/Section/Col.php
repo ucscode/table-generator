@@ -6,5 +6,4 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\MultipleExistenceInterfac
 
 class Col implements MultipleExistenceInterface
 {
-    
 }
