@@ -3,18 +3,20 @@
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CellInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\ValueTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\DataTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
 use Ucscode\UssElement\Collection\Attributes;
-use Ucscode\UssElement\Contracts\NodeInterface;
 
 abstract class AbstractCell implements CellInterface
 {
-    use TableElementTrait;
-    use ValueTrait;
+    use TableComponentTrait;
+    use RenderableTrait;
+    use DataTrait;
 
-    public function __construct(string|NodeInterface $value, array|Attributes $attributes = [])
+    public function __construct(mixed $data = null, ?Attributes $attributes = null)
     {
-        $this->buildElement($attributes);
+        $this->data = $data;
+        $this->attributes = $attributes ?? new Attributes();
     }
 }

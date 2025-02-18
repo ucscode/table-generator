@@ -5,22 +5,23 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\CellCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CellInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
 use Ucscode\UssElement\Collection\Attributes;
+use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
 class Tr implements TableComponentInterface
 {
-    use TableElementTrait;
+    use TableComponentTrait;
+    use RenderableTrait;
 
     protected CellCollection $cellCollection;
 
     public function __construct()
     {
         $this->cellCollection = new CellCollection();
-
-        $this->buildElement();
     }
 
     public function addCell(CellInterface $cell): static
@@ -52,8 +53,8 @@ class Tr implements TableComponentInterface
         return $this->cellCollection->indexOf($cell);
     }
 
-    protected function buildElement(array|Attributes $attributes = []): void
+    public function createElement(): ElementInterface
     {
-        $this->element = new ElementNode(NodeNameEnum::NODE_TR, $attributes);
+        return new ElementNode(NodeNameEnum::NODE_TR, $this->attributes);
     }
 }

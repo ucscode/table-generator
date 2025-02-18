@@ -3,29 +3,30 @@
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
 
 use Ucscode\UssElement\Collection\Attributes;
-use Ucscode\UssElement\Contracts\ElementInterface;
 
 trait RenderableTrait
 {
-    protected ElementInterface $element;
+    protected Attributes $attributes;
 
-    public function getElement(): ElementInterface
+    public function __toString(): string
     {
-        return $this->element;
+        return $this->render();
     }
 
     public function render(?int $indent = null): string
     {
-        return $this->element->render($indent);
+        return $this->createElement()->render($indent);
     }
 
     public function getAttributes(): Attributes
     {
-        return $this->element->getAttributes();
+        return $this->attributes;
     }
 
-    protected function buildElement(array|Attributes $attributes = []): void
+    public function setAttributes(Attributes $attributes): static
     {
-        throw new \LogicException('You must override this method');
+        $this->attributes = $attributes;
+
+        return $this;
     }
 }

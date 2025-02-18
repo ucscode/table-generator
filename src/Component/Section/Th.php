@@ -4,13 +4,14 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractCell;
 use Ucscode\UssElement\Collection\Attributes;
+use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
 class Th extends AbstractCell
 {
-    protected function buildElement(array|Attributes $attributes = []): void
+    public function createElement(): ElementInterface
     {
-        $this->element = new ElementNode(NodeNameEnum::NODE_TH, $attributes);
+        return new ElementNode(NodeNameEnum::NODE_TH, $this->attributes);
     }
 }

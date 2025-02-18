@@ -10,14 +10,17 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
 use Ucscode\UssElement\Collection\Attributes;
+use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
 class Table implements TableComponentInterface
 {
-    use TableElementTrait;
+    use TableComponentTrait;
+    use RenderableTrait;
 
     protected ?Caption $caption = null;
     protected ColGroupCollection $colGroupCollection;
@@ -27,9 +30,11 @@ class Table implements TableComponentInterface
 
     public function __construct()
     {
+        $this->caption = new Caption();
         $this->colGroupCollection = new ColGroupCollection();
+        $this->thead = new Thead();
         $this->tbodyCollection = new TbodyCollection();
-        $this->buildElement();
+        $this->tfoot = new Tfoot();
     }
 
     public function setCaption(Caption $caption): static
@@ -140,8 +145,8 @@ class Table implements TableComponentInterface
         return $this;
     }
 
-    protected function buildElement(array|Attributes $attributes = []): void
+    public function createElement(): ElementInterface
     {
-        $this->element = new ElementNode(NodeNameEnum::NODE_TABLE, $attributes, $attributes);
+        return new ElementNode(NodeNameEnum::NODE_TABLE, $this->attributes);
     }
 }

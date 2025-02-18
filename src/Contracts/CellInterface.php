@@ -4,5 +4,6 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
 
 interface CellInterface extends TableComponentInterface
 {
-    public function getValue(): ?string;
+    public function getData(): mixed;
+    public function setData(mixed $value): static;
 }

@@ -12,7 +12,6 @@ trait TrCollectionTrait
     public function __construct()
     {
         $this->trCollection = new TrCollection();
-        $this->buildElement();
     }
 
     public function getTrCollection(): TrCollection

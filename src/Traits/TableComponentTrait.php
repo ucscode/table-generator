@@ -2,10 +2,8 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
 
-trait TableElementTrait
+trait TableComponentTrait
 {
-    use RenderableTrait;
-
     protected ?string $name = null;
 
     public function setName(?string $name): static
