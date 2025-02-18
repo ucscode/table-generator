@@ -34,7 +34,7 @@ class TdTest extends TestCase
         ]);
 
         $node->appendChild(new TextNode('Working Logic'));
-        
+
         $td = new Td($node);
 
         $this->assertSame($td->createElement()->getInnerHtml(), $node->render());
@@ -53,7 +53,7 @@ class TdTest extends TestCase
         $td = new Td('Content', [
             'data-attr' => 'value-1',
         ]);
-        
+
         $this->assertSame($td->render(), '<td data-attr="value-1">Content</td>');
     }
 
@@ -62,7 +62,7 @@ class TdTest extends TestCase
         $td = new Td('Content', new Attributes([
             'data-attr' => 'value-1',
         ]));
-        
+
         $this->assertSame($td->render(), '<td data-attr="value-1">Content</td>');
     }
 

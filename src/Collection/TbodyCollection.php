@@ -14,7 +14,6 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableCollectionTrait;
 class TbodyCollection implements CollectionInterface
 {
     use CollectionTrait;
-    use RenderableCollectionTrait;
 
     public function add(Tbody $tbody): static
     {

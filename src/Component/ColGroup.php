@@ -7,6 +7,7 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Col;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
+use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
@@ -18,9 +19,10 @@ class ColGroup implements TableComponentInterface
 
     protected ColCollection $colCollection;
 
-    public function __construct()
+    public function __construct(array|Attributes $attributes = [])
     {
         $this->colCollection = new ColCollection();
+        $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
     }
 
     public function getColCollection(): ColCollection
@@ -59,6 +61,12 @@ class ColGroup implements TableComponentInterface
 
     public function createElement(): ElementInterface
     {
-        return new ElementNode(NodeNameEnum::NODE_COLGROUP, $this->attributes);
+        $colGroup = new ElementNode(NodeNameEnum::NODE_COLGROUP, $this->attributes);
+
+        foreach ($this->colCollection->toArray() as $col) {
+            $colGroup->appendChild($col->createElement());
+        }
+
+        return $colGroup;
     }
 }

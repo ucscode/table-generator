@@ -4,15 +4,11 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
+use Ucscode\UssElement\Contracts\ElementInterface;
 
 trait TrCollectionTrait
 {
     protected TrCollection $trCollection;
-
-    public function __construct()
-    {
-        $this->trCollection = new TrCollection();
-    }
 
     public function getTrCollection(): TrCollection
     {
@@ -46,5 +42,14 @@ trait TrCollectionTrait
     public function indexOf(Tr $tr): int|bool
     {
         return $this->trCollection->indexOf($tr);
+    }
+
+    protected function createTrOrientedElement(ElementInterface $element): ElementInterface
+    {
+        foreach ($this->trCollection->toArray() as $tr) {
+            $element->appendChild($tr->createElement());
+        }
+
+        return $element;
     }
 }

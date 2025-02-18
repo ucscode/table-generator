@@ -11,7 +11,7 @@ class Th extends AbstractCell
 {
     public function createElement(): ElementInterface
     {
-        return $this->renderLogic(
+        return $this->createDataOrientedElement(
             new ElementNode(NodeNameEnum::NODE_TH, $this->attributes),
             $this->data
         );

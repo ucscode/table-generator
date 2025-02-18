@@ -8,11 +8,6 @@ trait RenderableTrait
 {
     protected Attributes $attributes;
 
-    public function __construct(array|Attributes $attributes = [])
-    {
-        $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
-    }
-
     public function __toString(): string
     {
         return $this->render();

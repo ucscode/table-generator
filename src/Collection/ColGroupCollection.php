@@ -14,7 +14,6 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableCollectionTrait;
 class ColGroupCollection implements CollectionInterface
 {
     use CollectionTrait;
-    use RenderableCollectionTrait;
 
     public function add(ColGroup $colGroup): static
     {
