@@ -10,9 +10,14 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\UssElement\Enums\NodeNameEnum;
+use Ucscode\UssElement\Node\ElementNode;
 
 class Table implements RenderableInterface
 {
+    use RenderableTrait;
+
     protected ?Caption $caption = null;
     protected ColGroupCollection $colGroupCollection;
     protected ?Thead $thead = null;
@@ -23,6 +28,7 @@ class Table implements RenderableInterface
     {
         $this->colGroupCollection = new ColGroupCollection();
         $this->tbodyCollection = new TbodyCollection();
+        $this->buildElement();
     }
 
     public function setCaption(Caption $caption): static
@@ -131,5 +137,10 @@ class Table implements RenderableInterface
         $this->tbodyCollection->remove($indexOrTbody);
 
         return $this;
+    }
+
+    protected function buildElement(): void
+    {
+        $this->element = new ElementNode(NodeNameEnum::NODE_TABLE);
     }
 }

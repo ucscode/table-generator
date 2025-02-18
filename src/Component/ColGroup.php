@@ -5,13 +5,23 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Col;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\UssElement\Enums\NodeNameEnum;
+use Ucscode\UssElement\Node\ElementNode;
 
 class ColGroup implements TableComponentInterface, RenderableInterface
 {
+    use RenderableTrait;
+
     /**
      * @var Col[] $cols
      */
     protected array $cols = [];
+
+    public function __construct()
+    {
+        $this->buildElement();
+    }
 
     public function addCol(Col $col): static
     {
@@ -50,5 +60,10 @@ class ColGroup implements TableComponentInterface, RenderableInterface
     public function indexOf(Col $col): int|bool
     {
         return array_search($col, $this->cols, true);
+    }
+
+    protected function buildElement(): void
+    {
+        $this->element = new ElementNode(NodeNameEnum::NODE_COLGROUP);
     }
 }

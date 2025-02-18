@@ -6,6 +6,6 @@ use Ucscode\UssElement\Contracts\ElementInterface;
 
 interface RenderableInterface
 {
+    public function getElement(): ElementInterface;
     public function render(): string;
-    public function createElement(): ElementInterface;
 }
