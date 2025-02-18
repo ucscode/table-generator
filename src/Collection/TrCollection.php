@@ -5,6 +5,7 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Collection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CollectionInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableCollectionTrait;
 
 /**
  * @property Tr[] $items
@@ -12,6 +13,7 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
 class TrCollection implements CollectionInterface
 {
     use CollectionTrait;
+    use RenderableCollectionTrait;
 
     public function add(Tr $tr): static
     {

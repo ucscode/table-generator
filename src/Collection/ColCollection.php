@@ -5,6 +5,7 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Collection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Col;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CollectionInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableCollectionTrait;
 
 /**
  * @property Col[] $items
@@ -12,6 +13,7 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
 class ColCollection implements CollectionInterface
 {
     use CollectionTrait;
+    use RenderableCollectionTrait;
 
     public function add(Col $col): static
     {
