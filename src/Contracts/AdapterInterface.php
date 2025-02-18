@@ -2,11 +2,11 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Grid\Columns;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Grid\Rows;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
 
 interface AdapterInterface
 {
-    public function getColumns(): Columns;
-    public function getRows(): Rows;
+    public function getTheadRow(): Tr;
+    public function getTBodyRows(): TrCollection;
 }
