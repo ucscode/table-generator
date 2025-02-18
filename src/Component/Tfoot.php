@@ -2,14 +2,14 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TrCollectionTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class Tfoot implements TableElementInterface
+class Tfoot implements TableComponentInterface
 {
     use TableElementTrait;
     use TrCollectionTrait;

@@ -3,19 +3,15 @@
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Collection;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CollectionInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
-use Ucscode\UssElement\Contracts\CollectionInterface;
 
+/**
+ * @property Tr[] $items
+ */
 class TrCollection implements CollectionInterface
 {
     use CollectionTrait;
-
-    /**
-     * Table rows
-     *
-     * @var Tr[]
-     */
-    protected array $items = [];
 
     public function add(Tr $tr): static
     {
@@ -34,16 +30,16 @@ class TrCollection implements CollectionInterface
         return in_array($tr, $this->items, true);
     }
 
-    public function remove(Tr|int $indexOrTr): static
+    public function remove(Tr|int $trIdentity): static
     {
-        if ($indexOrTr instanceof Tr) {
-            $indexOrTr = $this->indexOf($indexOrTr);
+        if ($trIdentity instanceof Tr) {
+            $trIdentity = $this->indexOf($trIdentity);
         }
 
-        if ($indexOrTr !== false) {
+        if ($trIdentity !== false) {
             /** @var int $indexOrTr */
-            if (array_key_exists($indexOrTr, $this->items)) {
-                unset($this->items[$indexOrTr]);
+            if (array_key_exists($trIdentity, $this->items)) {
+                unset($this->items[$trIdentity]);
                 $this->items = array_values($this->items);
             }
         }

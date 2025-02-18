@@ -2,64 +2,58 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\ColCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Col;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class ColGroup implements TableElementInterface
+class ColGroup implements TableComponentInterface
 {
     use TableElementTrait;
 
-    /**
-     * @var Col[] $cols
-     */
-    protected array $cols = [];
+    protected ColCollection $colCollection;
 
     public function __construct()
     {
+        $this->colCollection = new ColCollection();
         $this->buildElement();
+    }
+
+    public function getColCollection(): ColCollection
+    {
+        return $this->colCollection;
     }
 
     public function addCol(Col $col): static
     {
-        $this->cols[] = $col;
+        $this->colCollection->add($col);
 
         return $this;
     }
 
     public function getCol(int $index): ?Col
     {
-        return $this->cols[$index] ?? null;
+        return $this->colCollection->get($index);
     }
 
     public function hasCol(Col $col): bool
     {
-        return in_array($col, $this->cols, true);
+        return $this->colCollection->has($col);
     }
 
-    public function removeCol(Col|int $indexOrCol): static
+    public function removeCol(Col|int $colIdentity): static
     {
-        if ($indexOrCol instanceof Col) {
-            $indexOrCol = $this->indexOf($indexOrCol);
-        }
-
-        if ($indexOrCol !== false) {
-            /** @var int $indexOrCol */
-            if (array_key_exists($indexOrCol, $this->cols)) {
-                unset($this->cols[$indexOrCol]);
-                $this->cols = array_values($this->cols);
-            }
-        }
+        $this->colCollection->remove($colIdentity);
 
         return $this;
     }
 
     public function indexOf(Col $col): int|bool
     {
-        return array_search($col, $this->cols, true);
+        return $this->colCollection->indexOf($col);
     }
 
     protected function buildElement(array|Attributes $attributes = []): void

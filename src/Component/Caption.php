@@ -2,14 +2,14 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\ValueTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class Caption implements TableElementInterface
+class Caption implements TableComponentInterface
 {
     use TableElementTrait;
     use ValueTrait;

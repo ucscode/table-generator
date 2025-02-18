@@ -3,9 +3,12 @@
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Collection;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CollectionInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
-use Ucscode\UssElement\Contracts\CollectionInterface;
 
+/**
+ * @property Tbody[] $items
+ */
 class TbodyCollection implements CollectionInterface
 {
     use CollectionTrait;
@@ -27,16 +30,16 @@ class TbodyCollection implements CollectionInterface
         return in_array($tbody, $this->items, true);
     }
 
-    public function remove(Tbody|int $indexOrTbody): static
+    public function remove(Tbody|int $tbodyIdentity): static
     {
-        if ($indexOrTbody instanceof Tbody) {
-            $indexOrTbody = $this->indexOf($indexOrTbody);
+        if ($tbodyIdentity instanceof Tbody) {
+            $tbodyIdentity = $this->indexOf($tbodyIdentity);
         }
 
-        if ($indexOrTbody !== false) {
+        if ($tbodyIdentity !== false) {
             /** @var int $indexOrTr */
-            if (array_key_exists($indexOrTbody, $this->items)) {
-                unset($this->items[$indexOrTbody]);
+            if (array_key_exists($tbodyIdentity, $this->items)) {
+                unset($this->items[$tbodyIdentity]);
                 $this->items = array_values($this->items);
             }
         }

@@ -9,13 +9,13 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Component\ColGroup;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class Table implements TableElementInterface
+class Table implements TableComponentInterface
 {
     use TableElementTrait;
 

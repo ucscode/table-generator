@@ -12,6 +12,7 @@ trait TrCollectionTrait
     public function __construct()
     {
         $this->trCollection = new TrCollection();
+        $this->buildElement();
     }
 
     public function getTrCollection(): TrCollection
@@ -28,33 +29,23 @@ trait TrCollectionTrait
 
     public function getTr(int $index): ?Tr
     {
-        return $this->items[$index] ?? null;
+        return $this->trCollection->get($index);
     }
 
     public function hasTr(Tr $tr): bool
     {
-        return in_array($tr, $this->items, true);
+        return $this->trCollection->has($tr);
     }
 
-    public function removeTr(Tr|int $indexOrTr): static
+    public function removeTr(Tr|int $trIdentity): static
     {
-        if ($indexOrTr instanceof Tr) {
-            $indexOrTr = $this->indexOf($indexOrTr);
-        }
-
-        if ($indexOrTr !== false) {
-            /** @var int $indexOrTr */
-            if (array_key_exists($indexOrTr, $this->items)) {
-                unset($this->items[$indexOrTr]);
-                $this->items = array_values($this->items);
-            }
-        }
+        $this->trCollection->remove($trIdentity);
 
         return $this;
     }
 
     public function indexOf(Tr $tr): int|bool
     {
-        return array_search($tr, $this->items, true);
+        return $this->trCollection->indexOf($tr);
     }
 }

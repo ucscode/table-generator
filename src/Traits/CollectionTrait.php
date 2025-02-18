@@ -2,7 +2,7 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 
 trait CollectionTrait
 {
@@ -42,10 +42,10 @@ trait CollectionTrait
         return $this;
     }
 
-    public function getByName(string $name): ?TableElementInterface
+    public function getComponentByName(string $name): ?TableComponentInterface
     {
         foreach ($this->items as $item) {
-            if ($item instanceof TableElementInterface) {
+            if ($item instanceof TableComponentInterface) {
                 if ($item->getName() === $name) {
                     return $item;
                 }
