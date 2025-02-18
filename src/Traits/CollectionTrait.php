@@ -2,6 +2,8 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
+
 trait CollectionTrait
 {
     protected array $items = [];
@@ -38,5 +40,18 @@ trait CollectionTrait
         $this->items = [];
 
         return $this;
+    }
+
+    public function getByName(string $name): ?TableElementInterface
+    {
+        foreach ($this->items as $item) {
+            if ($item instanceof TableElementInterface) {
+                if ($item->getName() === $name) {
+                    return $item;
+                }
+            }
+        }
+
+        return null;
     }
 }

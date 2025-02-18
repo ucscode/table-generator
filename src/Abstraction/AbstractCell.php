@@ -3,13 +3,12 @@
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CellInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableElementInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableElementTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\ValueTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Contracts\NodeInterface;
 
-abstract class AbstractCell implements TableElementInterface, CellInterface
+abstract class AbstractCell implements CellInterface
 {
     use TableElementTrait;
     use ValueTrait;

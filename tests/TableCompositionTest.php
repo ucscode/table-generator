@@ -15,8 +15,10 @@ class TableCompositionTest extends TestCase
         $columns = new Columns();
         $columns
             ->add('value')
-            ->add(new Th('Value'))
+            ->add(new Th('Value'), 'name')
         ;
+
+        $columns->getByName('column.0');
 
         $adapter = new ArrayAdapter([]);
         $adapter = new MysqlResultAdapter([]);
