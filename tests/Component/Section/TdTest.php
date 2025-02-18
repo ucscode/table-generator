@@ -4,7 +4,7 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Component\Section;
 
 use PHPUnit\Framework\TestCase;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Table;
+use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 use Ucscode\UssElement\Node\TextNode;
@@ -43,8 +43,41 @@ class TdTest extends TestCase
 
     public function testTdInnerTableRender(): void
     {
-        $td = new Td(new Td('Slim'));
+        $td = new Td(new Td('Content'));
 
-        $this->assertSame($td->render(), '<td><td>Slim</td></td>');
+        $this->assertSame($td->render(), '<td><td>Content</td></td>');
+    }
+
+    public function testTdWithArrayInConstructorRender(): void
+    {
+        $td = new Td('Content', [
+            'data-attr' => 'value-1',
+        ]);
+        
+        $this->assertSame($td->render(), '<td data-attr="value-1">Content</td>');
+    }
+
+    public function testTdWithAttributesInConstructorRender(): void
+    {
+        $td = new Td('Content', new Attributes([
+            'data-attr' => 'value-1',
+        ]));
+        
+        $this->assertSame($td->render(), '<td data-attr="value-1">Content</td>');
+    }
+
+    public function testTdWithAttributesOverrideRender(): void
+    {
+        $td = new Td('Content', new Attributes([
+            'daTa-AtTr' => 'value-1',
+            'devEloPer' => 'Unknown'
+        ]));
+
+        $td->getAttributes()
+            ->set('developer', 'ucscode')
+            ->set('extra', 'amazing')
+        ;
+
+        $this->assertSame($td->render(), '<td data-attr="value-1" developer="ucscode" extra="amazing">Content</td>');
     }
 }

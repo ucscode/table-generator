@@ -7,6 +7,7 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CellInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
+use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
@@ -18,9 +19,10 @@ class Tr implements TableComponentInterface
 
     protected CellCollection $cellCollection;
 
-    public function __construct()
+    public function __construct(array|Attributes $attributes = [])
     {
         $this->cellCollection = new CellCollection();
+        $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
     }
 
     public function addCell(CellInterface $cell): static
@@ -54,6 +56,12 @@ class Tr implements TableComponentInterface
 
     public function createElement(): ElementInterface
     {
-        return new ElementNode(NodeNameEnum::NODE_TR, $this->attributes);
+        $tr = new ElementNode(NodeNameEnum::NODE_TR, $this->attributes);
+
+        foreach ($this->cellCollection->toArray() as $cell) {
+            $tr->appendChild($cell->createElement());
+        }
+
+        return $tr;
     }
 }

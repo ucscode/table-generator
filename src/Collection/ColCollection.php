@@ -9,6 +9,7 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableCollectionTrait;
 
 /**
  * @property Col[] $items
+ * @method Col[] toArray()
  */
 class ColCollection implements CollectionInterface
 {
