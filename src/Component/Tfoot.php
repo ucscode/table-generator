@@ -2,12 +2,10 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\GridContainerInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TrTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TrCollectionTrait;
 
-class Tfoot implements GridContainerInterface
+class Tfoot implements RenderableInterface
 {
-    use CollectionTrait;
-    use TrTrait;
+    use TrCollectionTrait;
 }

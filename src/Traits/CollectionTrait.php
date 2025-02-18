@@ -32,4 +32,11 @@ trait CollectionTrait
 
         return $this;
     }
+
+    public function clear(): static
+    {
+        $this->items = [];
+
+        return $this;
+    }
 }

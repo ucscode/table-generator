@@ -2,10 +2,8 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CellInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\ValueTrait;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractCell;
 
-class Td implements CellInterface
+class Td extends AbstractCell
 {
-    use ValueTrait;
 }

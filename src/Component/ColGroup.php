@@ -3,9 +3,10 @@
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Col;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 
-class ColGroup implements TableComponentInterface
+class ColGroup implements TableComponentInterface, RenderableInterface
 {
     /**
      * @var Col[] $cols

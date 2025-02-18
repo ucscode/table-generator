@@ -2,8 +2,8 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\MultipleExistenceInterface;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
 
-class Col implements MultipleExistenceInterface
+class Col implements RenderableInterface
 {
 }

@@ -2,15 +2,16 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\ColGroupCollection;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TbodyCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Caption;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\ColGroup;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Collection\ColGroupCollection;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Collection\TbodyCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
 
-class Table
+class Table implements RenderableInterface
 {
     protected ?Caption $caption = null;
     protected ColGroupCollection $colGroupCollection;

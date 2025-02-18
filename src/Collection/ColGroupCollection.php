@@ -1,6 +1,6 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Collection;
+namespace Ucscode\HtmlComponent\HtmlTableGenerator\Collection;
 
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\ColGroup;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
