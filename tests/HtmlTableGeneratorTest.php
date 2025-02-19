@@ -55,7 +55,7 @@ class HtmlTableGeneratorTest extends TestCase
             new CsvArrayAdapter([
                 ['id'],
             ]),
-            new class implements MiddlewareInterface {
+            new class () implements MiddlewareInterface {
                 public function alterTr(Tr $tr): Tr
                 {
                     $positionIndex = $tr->getParameters()->get(HtmlTableGenerator::POSITION_INDEX);

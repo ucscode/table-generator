@@ -21,7 +21,7 @@ class CsvArrayAdapterTest extends TestCase
         [7, 'Sophia Martinez', 27, 'sophia.martinez@example.com', 'Spain'],
         [8, 'David Anderson', 35, 'david.anderson@example.com', 'Italy'],
     ];
-    
+
     #[DataProvider('paginatorProvider')]
     public function testCsvArrayAdapter(?Paginator $paginator, int $trItemsCount, array $data): void
     {
