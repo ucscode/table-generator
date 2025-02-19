@@ -2,19 +2,18 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Support\ParameterBag;
+
 trait TableComponentTrait
 {
-    protected ?string $name = null;
+    private ?ParameterBag $parameters = null;
 
-    public function setName(?string $name): static
+    public function getParameters(): ParameterBag
     {
-        $this->name = $name;
+        if ($this->parameters === null) {
+            $this->parameters = new ParameterBag();
+        }
 
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
+        return $this->parameters;
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Support\ParameterBag;
+
 interface TableComponentInterface extends RenderableInterface
 {
-    public function setName(?string $name): static;
-    public function getName(): ?string;
+    public function getParameters(): ParameterBag;
 }

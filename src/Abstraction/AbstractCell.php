@@ -14,6 +14,9 @@ abstract class AbstractCell implements CellInterface
     use RenderableTrait;
     use DataTrait;
 
+    /**
+     * @param NodeInterface|RenderableInterface|string $data
+     */
     public function __construct(mixed $data = null, array|Attributes $attributes = [])
     {
         $this->data = $data;

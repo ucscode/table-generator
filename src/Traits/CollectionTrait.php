@@ -2,8 +2,6 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
-
 trait CollectionTrait
 {
     protected array $items = [];
@@ -40,18 +38,5 @@ trait CollectionTrait
         $this->items = [];
 
         return $this;
-    }
-
-    public function getComponentByName(string $name): ?TableComponentInterface
-    {
-        foreach ($this->items as $item) {
-            if ($item instanceof TableComponentInterface) {
-                if ($item->getName() === $name) {
-                    return $item;
-                }
-            }
-        }
-
-        return null;
     }
 }
