@@ -2,13 +2,13 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Adapter;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractAdapter;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
 
-class PostgresResultAdapter implements AdapterInterface
+class PostgresResultAdapter extends AbstractAdapter
 {
     protected \PgSql\Result $result;
 
@@ -17,7 +17,7 @@ class PostgresResultAdapter implements AdapterInterface
         $this->result = $result;
     }
 
-    public function getColumns(): Tr
+    public function getTheadTr(): Tr
     {
         $thead = new Tr();
         $numFields = pg_num_fields($this->result);
@@ -29,7 +29,7 @@ class PostgresResultAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getRows(): TrCollection
+    public function getTbodyTrCollection(): TrCollection
     {
         $tbodyRows = new TrCollection();
 
@@ -44,5 +44,10 @@ class PostgresResultAdapter implements AdapterInterface
         }
 
         return $tbodyRows;
+    }
+
+    protected function initialize(): void
+    {
+
     }
 }

@@ -3,13 +3,13 @@
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Adapter;
 
 use Doctrine\DBAL\Statement;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractAdapter;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
 
-class DoctrineDBALAdapter implements AdapterInterface
+class DoctrineDBALAdapter extends AbstractAdapter
 {
     protected array $data;
 
@@ -18,7 +18,7 @@ class DoctrineDBALAdapter implements AdapterInterface
         $this->data = $statement->fetchAllAssociative();
     }
 
-    public function getColumns(): Tr
+    public function getTheadTr(): Tr
     {
         $thead = new Tr();
         $firstRow = $this->data[0] ?? [];
@@ -32,7 +32,7 @@ class DoctrineDBALAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getRows(): TrCollection
+    public function getTbodyTrCollection(): TrCollection
     {
         $tbodyRows = new TrCollection();
 
@@ -47,5 +47,10 @@ class DoctrineDBALAdapter implements AdapterInterface
         }
 
         return $tbodyRows;
+    }
+
+    protected function initialize(): void
+    {
+
     }
 }

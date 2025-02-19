@@ -34,12 +34,12 @@ class HtmlTableGenerator implements \Stringable
     protected function processAdapter(AdapterInterface $adapter): void
     {
         $thead = (new Thead())
-            ->addTr($adapter->getColumns())
+            ->addTr($adapter->getTheadTr())
         ;
 
         $tbody = new Tbody();
 
-        foreach ($adapter->getRows()->toArray() as $tr) {
+        foreach ($adapter->getTbodyTrCollection()->toArray() as $tr) {
             $tbody->addTr($tr);
         }
 

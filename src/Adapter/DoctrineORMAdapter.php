@@ -4,13 +4,13 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Adapter;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractAdapter;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
 
-class DoctrineORMAdapter implements AdapterInterface
+class DoctrineORMAdapter extends AbstractAdapter
 {
     protected array $data;
 
@@ -23,7 +23,7 @@ class DoctrineORMAdapter implements AdapterInterface
         $this->data = $input->getResult(Query::HYDRATE_ARRAY);
     }
 
-    public function getColumns(): Tr
+    public function getTheadTr(): Tr
     {
         $thead = new Tr();
         $headers = array_keys($this->data[0] ?? []);
@@ -35,7 +35,7 @@ class DoctrineORMAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getRows(): TrCollection
+    public function getTbodyTrCollection(): TrCollection
     {
         $tbodyRows = new TrCollection();
 
@@ -50,5 +50,10 @@ class DoctrineORMAdapter implements AdapterInterface
         }
 
         return $tbodyRows;
+    }
+
+    protected function initialize(): void
+    {
+
     }
 }

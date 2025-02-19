@@ -2,19 +2,19 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Adapter;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractAdapter;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
 
-class MysqlResultAdapter implements AdapterInterface
+class MysqlResultAdapter extends AbstractAdapter
 {
     public function __construct(protected \mysqli_result $result)
     {
     }
 
-    public function getColumns(): Tr
+    public function getTheadTr(): Tr
     {
         $thead = new Tr();
 
@@ -27,7 +27,7 @@ class MysqlResultAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getRows(): TrCollection
+    public function getTbodyTrCollection(): TrCollection
     {
         $tbodyRows = new TrCollection();
 
@@ -44,5 +44,10 @@ class MysqlResultAdapter implements AdapterInterface
         }
 
         return $tbodyRows;
+    }
+
+    protected function initialize(): void
+    {
+
     }
 }

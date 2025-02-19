@@ -25,6 +25,11 @@ class Tr implements TableComponentInterface
         $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
     }
 
+    public function getCellCollection(): CellCollection
+    {
+        return $this->cellCollection;
+    }
+
     public function addCell(CellInterface $cell): static
     {
         $this->cellCollection->add($cell);
