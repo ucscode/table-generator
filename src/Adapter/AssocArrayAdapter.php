@@ -20,7 +20,7 @@ class AssocArrayAdapter implements AdapterInterface
     {
     }
 
-    public function getTheadRow(): Tr
+    public function getColumns(): Tr
     {
         $thead = new Tr();
 
@@ -31,7 +31,7 @@ class AssocArrayAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getTBodyRows(): TrCollection
+    public function getRows(): TrCollection
     {
         $tbodyRows = new TrCollection();
 

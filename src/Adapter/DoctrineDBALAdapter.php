@@ -18,7 +18,7 @@ class DoctrineDBALAdapter implements AdapterInterface
         $this->data = $statement->fetchAllAssociative();
     }
 
-    public function getTheadRow(): Tr
+    public function getColumns(): Tr
     {
         $thead = new Tr();
         $firstRow = $this->data[0] ?? [];
@@ -32,7 +32,7 @@ class DoctrineDBALAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getTBodyRows(): TrCollection
+    public function getRows(): TrCollection
     {
         $tbodyRows = new TrCollection();
 

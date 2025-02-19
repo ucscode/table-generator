@@ -14,7 +14,7 @@ class MysqlResultAdapter implements AdapterInterface
     {
     }
 
-    public function getTheadRow(): Tr
+    public function getColumns(): Tr
     {
         $thead = new Tr();
 
@@ -27,7 +27,7 @@ class MysqlResultAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getTBodyRows(): TrCollection
+    public function getRows(): TrCollection
     {
         $tbodyRows = new TrCollection();
 

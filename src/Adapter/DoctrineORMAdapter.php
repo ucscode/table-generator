@@ -23,7 +23,7 @@ class DoctrineORMAdapter implements AdapterInterface
         $this->data = $input->getResult(Query::HYDRATE_ARRAY);
     }
 
-    public function getTheadRow(): Tr
+    public function getColumns(): Tr
     {
         $thead = new Tr();
         $headers = array_keys($this->data[0] ?? []);
@@ -35,7 +35,7 @@ class DoctrineORMAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getTBodyRows(): TrCollection
+    public function getRows(): TrCollection
     {
         $tbodyRows = new TrCollection();
 

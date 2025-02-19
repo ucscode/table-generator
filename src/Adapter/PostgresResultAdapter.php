@@ -17,7 +17,7 @@ class PostgresResultAdapter implements AdapterInterface
         $this->result = $result;
     }
 
-    public function getTheadRow(): Tr
+    public function getColumns(): Tr
     {
         $thead = new Tr();
         $numFields = pg_num_fields($this->result);
@@ -29,7 +29,7 @@ class PostgresResultAdapter implements AdapterInterface
         return $thead;
     }
 
-    public function getTBodyRows(): TrCollection
+    public function getRows(): TrCollection
     {
         $tbodyRows = new TrCollection();
 

@@ -7,6 +7,6 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
 
 interface AdapterInterface
 {
-    public function getTheadRow(): Tr;
-    public function getTBodyRows(): TrCollection;
+    public function getColumns(): Tr;
+    public function getRows(): TrCollection;
 }
