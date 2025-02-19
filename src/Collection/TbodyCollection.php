@@ -5,11 +5,10 @@ namespace Ucscode\HtmlComponent\HtmlTableGenerator\Collection;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CollectionInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableCollectionTrait;
 
 /**
  * @property Tbody[] $items
- * @method Tbody toArray()
+ * @method Tbody[] toArray()
  */
 class TbodyCollection implements CollectionInterface
 {

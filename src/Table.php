@@ -12,6 +12,7 @@ use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
+use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
@@ -27,13 +28,11 @@ class Table implements TableComponentInterface
     protected TbodyCollection $tbodyCollection;
     protected ?Tfoot $tfoot = null;
 
-    public function __construct()
+    public function __construct(array|Attributes $attributes = [])
     {
-        $this->caption = new Caption();
         $this->colGroupCollection = new ColGroupCollection();
-        $this->thead = new Thead();
         $this->tbodyCollection = new TbodyCollection();
-        $this->tfoot = new Tfoot();
+        $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
     }
 
     public function setCaption(Caption $caption): static
@@ -46,6 +45,13 @@ class Table implements TableComponentInterface
     public function getCaption(): ?Caption
     {
         return $this->caption;
+    }
+
+    public function removeCaption(): static
+    {
+        $this->caption = null;
+
+        return $this;
     }
 
     public function setColGroupCollection(ColGroupCollection $colGroupCollection): static
@@ -96,6 +102,13 @@ class Table implements TableComponentInterface
         return $this->thead;
     }
 
+    public function removeThead(): static
+    {
+        $this->thead = null;
+
+        return $this;
+    }
+
     public function setTfoot(Tfoot $tfoot): static
     {
         $this->tfoot = $tfoot;
@@ -106,6 +119,13 @@ class Table implements TableComponentInterface
     public function getTfoot(): ?Tfoot
     {
         return $this->tfoot;
+    }
+
+    public function removeTfoot(): static
+    {
+        $this->tfoot = null;
+
+        return $this;
     }
 
     public function setTbodyCollection(TbodyCollection $tbodyCollection): static
@@ -146,6 +166,32 @@ class Table implements TableComponentInterface
 
     public function createElement(): ElementInterface
     {
-        return new ElementNode(NodeNameEnum::NODE_TABLE, $this->attributes);
+        $table = new ElementNode(NodeNameEnum::NODE_TABLE, $this->attributes);
+
+        if ($this->caption) {
+            $table->appendChild($this->caption->createElement());
+        }
+
+        if (!$this->colGroupCollection->isEmpty()) {
+            foreach ($this->colGroupCollection->toArray() as $colGroup) {
+                $table->appendChild($colGroup->createElement());
+            }
+        }
+
+        if ($this->thead) {
+            $table->appendChild($this->thead->createElement());
+        }
+
+        if (!$this->tbodyCollection->isEmpty()) {
+            foreach ($this->tbodyCollection->toArray() as $tbody) {
+                $table->appendChild($tbody->createElement());
+            }
+        }
+
+        if ($this->tfoot) {
+            $table->appendChild($this->tfoot->createElement());
+        }
+
+        return $table;
     }
 }
