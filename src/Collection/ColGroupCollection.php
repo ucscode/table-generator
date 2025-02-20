@@ -2,18 +2,15 @@
 
 namespace Ucscode\HtmlComponent\TableGenerator\Collection;
 
+use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractCollection;
 use Ucscode\HtmlComponent\TableGenerator\Component\ColGroup;
-use Ucscode\HtmlComponent\TableGenerator\Contracts\CollectionInterface;
-use Ucscode\HtmlComponent\TableGenerator\Traits\CollectionTrait;
 
 /**
  * @property ColGroup[] $items
  * @method ColGroup[] toArray()
  */
-class ColGroupCollection implements CollectionInterface
+class ColGroupCollection extends AbstractCollection
 {
-    use CollectionTrait;
-
     public function add(ColGroup $colGroup): static
     {
         $this->items[] = $colGroup;
@@ -51,5 +48,10 @@ class ColGroupCollection implements CollectionInterface
     public function indexOf(ColGroup $colGroup): int|bool
     {
         return array_search($colGroup, $this->items, true);
+    }
+
+    protected function getCollectionType(): string
+    {
+        return ColGroup::class;
     }
 }

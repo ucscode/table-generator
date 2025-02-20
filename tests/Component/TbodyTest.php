@@ -46,9 +46,9 @@ class TbodyTest extends TestCase
 
     public function testTbodyTrTdWithAttributes(): void
     {
-        $tbody = (new Tbody(['name' => 'value']))
+        $tbody = (new Tbody(null, ['name' => 'value']))
             ->addTr(
-                (new Tr(['param' => 1]))
+                (new Tr(null, ['param' => 1]))
                     ->addCell(new Td('Excellent', ['is-true' => 'false']))
             )
             ->addTr(new Tr())

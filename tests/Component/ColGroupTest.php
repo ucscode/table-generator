@@ -28,7 +28,7 @@ class ColGroupTest extends TestCase
 
     public function testColGroupColsAttributesRender(): void
     {
-        $colGroup = new ColGroup([
+        $colGroup = new ColGroup(null, [
             'data-name' => 'value-1',
             'data-name' => 'value-2',
             'data-Name' => 'value-3',

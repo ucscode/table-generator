@@ -2,18 +2,15 @@
 
 namespace Ucscode\HtmlComponent\TableGenerator\Collection;
 
+use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractCollection;
 use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
-use Ucscode\HtmlComponent\TableGenerator\Contracts\CollectionInterface;
-use Ucscode\HtmlComponent\TableGenerator\Traits\CollectionTrait;
 
 /**
  * @property Tbody[] $items
  * @method Tbody[] toArray()
  */
-class TbodyCollection implements CollectionInterface
+class TbodyCollection extends AbstractCollection
 {
-    use CollectionTrait;
-
     public function add(Tbody $tbody): static
     {
         $this->items[] = $tbody;
@@ -51,5 +48,10 @@ class TbodyCollection implements CollectionInterface
     public function indexOf(Tbody $tbody): int|bool
     {
         return array_search($tbody, $this->items, true);
+    }
+
+    protected function getCollectionType(): string
+    {
+        return Tbody::class;
     }
 }

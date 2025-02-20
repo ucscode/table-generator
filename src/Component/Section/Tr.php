@@ -19,9 +19,14 @@ class Tr implements TableComponentInterface
 
     protected CellCollection $cellCollection;
 
-    public function __construct(array|Attributes $attributes = [])
+    /**
+     * @param CellInterface[]|CellCollection $collection
+     * @param array<string,string>|Attributes $attributes
+     */
+    public function __construct(null|array|CellCollection $collection = null, array|Attributes $attributes = [])
     {
-        $this->cellCollection = new CellCollection();
+        $collection ??= [];
+        $this->cellCollection = $collection instanceof CellCollection ? $collection : new CellCollection($collection);
         $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
     }
 

@@ -2,12 +2,11 @@
 
 namespace Ucscode\HtmlComponent\TableGenerator\Component;
 
-use Ucscode\HtmlComponent\TableGenerator\Collection\TrCollection;
 use Ucscode\HtmlComponent\TableGenerator\Contracts\TableComponentInterface;
+use Ucscode\HtmlComponent\TableGenerator\Traits\Constructor\TrConstructorTrait;
 use Ucscode\HtmlComponent\TableGenerator\Traits\RenderableTrait;
 use Ucscode\HtmlComponent\TableGenerator\Traits\TableComponentTrait;
 use Ucscode\HtmlComponent\TableGenerator\Traits\TrCollectionTrait;
-use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
@@ -17,12 +16,7 @@ class Tbody implements TableComponentInterface
     use TableComponentTrait;
     use RenderableTrait;
     use TrCollectionTrait;
-
-    public function __construct(array|Attributes $attributes = [])
-    {
-        $this->trCollection = new TrCollection();
-        $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
-    }
+    use TrConstructorTrait;
 
     public function createElement(): ElementInterface
     {

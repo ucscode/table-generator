@@ -19,9 +19,10 @@ class ColGroup implements TableComponentInterface
 
     protected ColCollection $colCollection;
 
-    public function __construct(array|Attributes $attributes = [])
+    public function __construct(null|array|ColCollection $collection = null, array|Attributes $attributes = [])
     {
-        $this->colCollection = new ColCollection();
+        $collection ??= [];
+        $this->colCollection = $collection instanceof ColCollection ? $collection : new ColCollection($collection);
         $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
     }
 

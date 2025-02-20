@@ -2,18 +2,15 @@
 
 namespace Ucscode\HtmlComponent\TableGenerator\Collection;
 
+use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractCollection;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\TableGenerator\Contracts\CollectionInterface;
-use Ucscode\HtmlComponent\TableGenerator\Traits\CollectionTrait;
 
 /**
  * @property Tr[] $items
  * @method Tr[] toArray()
  */
-class TrCollection implements CollectionInterface
+class TrCollection extends AbstractCollection
 {
-    use CollectionTrait;
-
     public function add(Tr $tr): static
     {
         $this->items[] = $tr;
@@ -51,5 +48,10 @@ class TrCollection implements CollectionInterface
     public function indexOf(Tr $tr): int|bool
     {
         return array_search($tr, $this->items, true);
+    }
+
+    protected function getCollectionType(): string
+    {
+        return Tr::class;
     }
 }

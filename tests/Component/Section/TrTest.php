@@ -28,7 +28,7 @@ class TrTest extends TestCase
 
     public function testTrAttrCellAttrRender(): void
     {
-        $tr = (new Tr(['id' => 'value-1']))
+        $tr = (new Tr(null, ['id' => 'value-1']))
             ->addCell(new Th('Black', ['data-dev' => 'ucscode']))
             ->addCell(new Td('White', ['data-made-with' => 'love']))
         ;
