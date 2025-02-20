@@ -2,6 +2,7 @@
 
 namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
 
+use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\ArbitraryDataInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
 use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\DataTrait;
@@ -11,7 +12,7 @@ use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;
 
-class Caption implements TableComponentInterface
+class Caption implements TableComponentInterface, ArbitraryDataInterface
 {
     use TableComponentTrait;
     use RenderableTrait;

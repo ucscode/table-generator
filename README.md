@@ -129,7 +129,7 @@ $htmlTableGenerator = new HtmlTableGenerator($adapter, new ActionsMiddleware());
 echo $htmlTableGenerator->render();
 ```
 
-Alternatively, apply middleware an regenerate the table structure
+Alternatively, apply middleware and regenerate the table structure
 
 ```php
 $htmlTableGenerator = new HtmlTableGenerator($adapter);
@@ -171,7 +171,8 @@ Custom adapters can be created by implementing `AdapterInterface`:
 ```php
 use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
 
-class CustomAdapter implements AdapterInterface {
+class CustomAdapter implements AdapterInterface 
+{
     public function getTheadTr(): Tr { ... }
     public function getTbodyTrCollection(): TrCollection { ... }
     public function getPaginator(): Paginator { ... }
