@@ -1,8 +1,8 @@
 # Table Generator
 
-[![Latest Stable Version](https://poser.pugx.org/ucscode/html-table-generator/v/stable)](https://packagist.org/packages/ucscode/html-table-generator)
-[![License](https://poser.pugx.org/ucscode/html-table-generator/license)](https://packagist.org/packages/ucscode/html-table-generator)
-[![Total Downloads](https://poser.pugx.org/ucscode/html-table-generator/downloads)](https://packagist.org/packages/ucscode/html-table-generator)
+[![Latest Stable Version](https://poser.pugx.org/ucscode/table-generator/v/stable)](https://packagist.org/packages/ucscode/table-generator)
+[![License](https://poser.pugx.org/ucscode/table-generator/license)](https://packagist.org/packages/ucscode/table-generator)
+[![Total Downloads](https://poser.pugx.org/ucscode/table-generator/downloads)](https://packagist.org/packages/ucscode/table-generator)
 
 Table Generator is a powerful yet flexible PHP library that allows you to create and manipulate HTML tables dynamically with minimal effort. Whether you need to generate tables from MySQL query results, CSV data, associative arrays, or any custom format, this package provides a structured and extensible way to do so.
 
@@ -20,7 +20,7 @@ Table Generator is a powerful yet flexible PHP library that allows you to create
 Install via Composer:
 
 ```sh
-composer require ucscode/html-table-generator
+composer require ucscode/table-generator
 ```
 
 ## Quick Example
