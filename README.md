@@ -1,10 +1,10 @@
-# Html Table Generator
+# Table Generator
 
 [![Latest Stable Version](https://poser.pugx.org/ucscode/html-table-generator/v/stable)](https://packagist.org/packages/ucscode/html-table-generator)
 [![License](https://poser.pugx.org/ucscode/html-table-generator/license)](https://packagist.org/packages/ucscode/html-table-generator)
 [![Total Downloads](https://poser.pugx.org/ucscode/html-table-generator/downloads)](https://packagist.org/packages/ucscode/html-table-generator)
 
-Html Table Generator is a powerful yet flexible PHP library that allows you to create and manipulate HTML tables dynamically with minimal effort. Whether you need to generate tables from MySQL query results, CSV data, associative arrays, or any custom format, this package provides a structured and extensible way to do so.
+Table Generator is a powerful yet flexible PHP library that allows you to create and manipulate HTML tables dynamically with minimal effort. Whether you need to generate tables from MySQL query results, CSV data, associative arrays, or any custom format, this package provides a structured and extensible way to do so.
 
 ## Features
 
@@ -35,7 +35,7 @@ $data = [
 ];
 
 $adapter = new AssocArrayAdapter($data);
-$htmlTableGenerator = new HtmlTableGenerator($adapter);
+$htmlTableGenerator = new TableGenerator($adapter);
 
 echo $htmlTableGenerator->render();
 ```
@@ -72,7 +72,7 @@ $mysqli = new mysqli("localhost", "user", "password", "database");
 $result = $mysqli->query("SELECT id, name, email FROM users");
 
 $adapter = new MysqliResultAdapter($result);
-$htmlTableGenerator = new HtmlTableGenerator($adapter);
+$htmlTableGenerator = new TableGenerator($adapter);
 
 echo $htmlTableGenerator->render();
 ```
@@ -91,7 +91,7 @@ $data = [...]; // Your CSV-like array data
 $paginator = new Paginator(0, 10, 2); // 10 items per page, on page 2
 $adapter = new CsvArrayAdapter($data, $paginator);
 
-$htmlTableGenerator = new HtmlTableGenerator($adapter);
+$htmlTableGenerator = new TableGenerator($adapter);
 
 echo $htmlTableGenerator->render();
 ```
@@ -124,7 +124,7 @@ Apply middleware when creating the table:
 
 ```php
 $adapter = new MysqliResultAdapter($result);
-$htmlTableGenerator = new HtmlTableGenerator($adapter, new ActionsMiddleware());
+$htmlTableGenerator = new TableGenerator($adapter, new ActionsMiddleware());
 
 echo $htmlTableGenerator->render();
 ```
@@ -132,7 +132,7 @@ echo $htmlTableGenerator->render();
 Alternatively, apply middleware and regenerate the table structure
 
 ```php
-$htmlTableGenerator = new HtmlTableGenerator($adapter);
+$htmlTableGenerator = new TableGenerator($adapter);
 $htmlTableGenerator->setMiddleWare(new ActionsMiddleware())->regenerate();
 
 echo $htmlTableGenerator->render();
