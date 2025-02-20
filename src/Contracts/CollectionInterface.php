@@ -1,6 +1,6 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
+namespace Ucscode\HtmlComponent\TableGenerator\Contracts;
 
 use Ucscode\UssElement\Contracts\CollectionInterface as UssElementCollectionInterface;
 

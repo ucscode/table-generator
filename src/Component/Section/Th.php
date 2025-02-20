@@ -1,8 +1,8 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section;
+namespace Ucscode\HtmlComponent\TableGenerator\Component\Section;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractCell;
+use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractCell;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;

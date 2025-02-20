@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
+namespace Ucscode\HtmlComponent\TableGenerator\Traits;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\TableGenerator\Collection\TrCollection;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\UssElement\Contracts\ElementInterface;
 
 trait TrCollectionTrait

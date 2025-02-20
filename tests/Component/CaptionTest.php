@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Component;
+namespace Ucscode\HtmlComponent\TableGenerator\Test\Component;
 
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Caption;
+use Ucscode\HtmlComponent\TableGenerator\Component\Caption;
 use Ucscode\UssElement\Collection\ClassList;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;

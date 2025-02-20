@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
+namespace Ucscode\HtmlComponent\TableGenerator\Contracts;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\TableGenerator\Collection\TrCollection;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\Paginator\Paginator;
 
 interface AdapterInterface

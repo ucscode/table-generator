@@ -1,13 +1,13 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Adapter;
+namespace Ucscode\HtmlComponent\TableGenerator\Adapter;
 
 use Doctrine\DBAL\Statement;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction\AbstractAdapter;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractAdapter;
+use Ucscode\HtmlComponent\TableGenerator\Collection\TrCollection;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 
 class DoctrineDBALAdapter extends AbstractAdapter
 {

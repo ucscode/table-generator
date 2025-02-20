@@ -1,8 +1,8 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
+namespace Ucscode\HtmlComponent\TableGenerator\Contracts;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Support\ParameterBag;
+use Ucscode\HtmlComponent\TableGenerator\Support\ParameterBag;
 
 interface TableComponentInterface extends RenderableInterface
 {

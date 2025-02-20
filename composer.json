@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ucscode\\HtmlComponent\\HtmlTableGenerator\\": "src/"
+            "Ucscode\\HtmlComponent\\TableGenerator\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ucscode\\HtmlComponent\\HtmlTableGenerator\\Test\\": "tests/"
+            "Ucscode\\HtmlComponent\\TableGenerator\\Test\\": "tests/"
         }
     },
     "minimum-stability": "stable",

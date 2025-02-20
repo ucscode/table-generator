@@ -1,12 +1,12 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Component;
+namespace Ucscode\HtmlComponent\TableGenerator\Test\Component;
 
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
 
 class TbodyTest extends TestCase
 {

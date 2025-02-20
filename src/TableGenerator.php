@@ -1,16 +1,16 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator;
+namespace Ucscode\HtmlComponent\TableGenerator;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\MiddlewareInterface;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tfoot;
+use Ucscode\HtmlComponent\TableGenerator\Component\Thead;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\AdapterInterface;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\MiddlewareInterface;
 use Ucscode\Paginator\Paginator;
 use Ucscode\UssElement\Collection\Attributes;
 
-class HtmlTableGenerator implements \Stringable
+class TableGenerator implements \Stringable
 {
     public const POSITION_INDEX = ':position';
     public const SECTION_THEAD = 1;

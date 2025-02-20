@@ -1,10 +1,10 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Component;
+namespace Ucscode\HtmlComponent\TableGenerator\Test\Component;
 
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\ColGroup;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Col;
+use Ucscode\HtmlComponent\TableGenerator\Component\ColGroup;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Col;
 
 class ColGroupTest extends TestCase
 {

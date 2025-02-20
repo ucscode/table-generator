@@ -1,27 +1,27 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test;
+namespace Ucscode\HtmlComponent\TableGenerator\Test;
 
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Adapter\CsvArrayAdapter;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\MiddlewareInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\HtmlTableGenerator;
+use Ucscode\HtmlComponent\TableGenerator\Adapter\CsvArrayAdapter;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\MiddlewareInterface;
+use Ucscode\HtmlComponent\TableGenerator\TableGenerator;
 use Ucscode\UssElement\Collection\Attributes;
 
-class HtmlTableGeneratorTest extends TestCase
+class TableGeneratorTest extends TestCase
 {
     public function testHtmlTableOutput(): void
     {
-        $htmlTableGenerator = new HtmlTableGenerator(new CsvArrayAdapter([]));
+        $htmlTableGenerator = new TableGenerator(new CsvArrayAdapter([]));
 
         $this->assertSame($htmlTableGenerator->render(), '<table></table>');
     }
 
     public function testHtmlTableTheadOutput(): void
     {
-        $htmlTableGenerator = new HtmlTableGenerator(new CsvArrayAdapter([
+        $htmlTableGenerator = new TableGenerator(new CsvArrayAdapter([
             ['id', 'name']
         ]));
 
@@ -30,7 +30,7 @@ class HtmlTableGeneratorTest extends TestCase
 
     public function testHtmlTableTheadTbodyOutput(): void
     {
-        $htmlTableGenerator = new HtmlTableGenerator(new CsvArrayAdapter([
+        $htmlTableGenerator = new TableGenerator(new CsvArrayAdapter([
             ['id'],
             [2, 'extra']
         ]));
@@ -40,7 +40,7 @@ class HtmlTableGeneratorTest extends TestCase
 
     public function testHtmlTableTheadTfootOutput(): void
     {
-        $htmlTableGenerator = new HtmlTableGenerator(new CsvArrayAdapter([
+        $htmlTableGenerator = new TableGenerator(new CsvArrayAdapter([
             ['id'],
         ]));
 
@@ -51,16 +51,16 @@ class HtmlTableGeneratorTest extends TestCase
 
     public function testHtmlTableMiddleware(): void
     {
-        $htmlTableGenerator = new HtmlTableGenerator(
+        $htmlTableGenerator = new TableGenerator(
             new CsvArrayAdapter([
                 ['id'],
             ]),
             new class () implements MiddlewareInterface {
                 public function alterTr(Tr $tr): Tr
                 {
-                    $positionIndex = $tr->getParameters()->get(HtmlTableGenerator::POSITION_INDEX);
+                    $positionIndex = $tr->getParameters()->get(TableGenerator::POSITION_INDEX);
 
-                    if ($positionIndex === HtmlTableGenerator::SECTION_TFOOT) {
+                    if ($positionIndex === TableGenerator::SECTION_TFOOT) {
                         $tr->getCell(0)->setData('transform');
                         $tr->addCell(new Th('action'));
                     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Collection;
+namespace Ucscode\HtmlComponent\TableGenerator\Collection;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CollectionInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\CollectionInterface;
+use Ucscode\HtmlComponent\TableGenerator\Traits\CollectionTrait;
 
 /**
  * @property Tbody[] $items

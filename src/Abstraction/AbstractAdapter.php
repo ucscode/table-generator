@@ -1,8 +1,8 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction;
+namespace Ucscode\HtmlComponent\TableGenerator\Abstraction;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\AdapterInterface;
 use Ucscode\Paginator\Paginator;
 
 abstract class AbstractAdapter implements AdapterInterface

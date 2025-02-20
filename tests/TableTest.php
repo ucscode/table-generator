@@ -1,14 +1,14 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test;
+namespace Ucscode\HtmlComponent\TableGenerator\Test;
 
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Caption;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\ColGroup;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Table;
+use Ucscode\HtmlComponent\TableGenerator\Component\Caption;
+use Ucscode\HtmlComponent\TableGenerator\Component\ColGroup;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tfoot;
+use Ucscode\HtmlComponent\TableGenerator\Component\Thead;
+use Ucscode\HtmlComponent\TableGenerator\Table;
 
 class TableTest extends TestCase
 {

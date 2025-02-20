@@ -1,8 +1,8 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
+namespace Ucscode\HtmlComponent\TableGenerator\Traits;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\RenderableInterface;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\RenderableInterface;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Contracts\NodeInterface;
 use Ucscode\UssElement\Node\TextNode;

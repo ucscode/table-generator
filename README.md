@@ -26,8 +26,8 @@ composer require ucscode/html-table-generator
 ## Quick Example
 
 ```php
-use Ucscode\HtmlComponent\HtmlTableGenerator;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Adapter\AssocArrayAdapter;
+use Ucscode\HtmlComponent\TableGenerator;
+use Ucscode\HtmlComponent\TableGenerator\Adapter\AssocArrayAdapter;
 
 $data = [
     ['id' => 1, 'name' => 'John Doe', 'email' => 'john@example.com'],
@@ -65,8 +65,8 @@ Adapters are responsible for structuring data into an HTML table. Each adapter c
 ### Example: Using a MySQLi Adapter
 
 ```php
-use Ucscode\HtmlComponent\HtmlTableGenerator;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Adapter\MysqliResultAdapter;
+use Ucscode\HtmlComponent\TableGenerator;
+use Ucscode\HtmlComponent\TableGenerator\Adapter\MysqliResultAdapter;
 
 $mysqli = new mysqli("localhost", "user", "password", "database");
 $result = $mysqli->query("SELECT id, name, email FROM users");
@@ -84,7 +84,7 @@ Pagination is integrated using [ucscode/easy-paginator](https://github.com/ucsco
 ### Example: Paginating a CSV Table
 
 ```php
-use Ucscode\HtmlComponent\HtmlTableGenerator\Adapter\CsvArrayAdapter;
+use Ucscode\HtmlComponent\TableGenerator\Adapter\CsvArrayAdapter;
 use Ucscode\EasyPaginator\Paginator;
 
 $data = [...]; // Your CSV-like array data
@@ -103,9 +103,9 @@ Middleware allows modification of table rows before rendering. This is useful wh
 ### Example: Adding an "Actions" Column
 
 ```php
-use Ucscode\HtmlComponent\HtmlTableGenerator\Middleware\MiddlewareInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Td;
+use Ucscode\HtmlComponent\TableGenerator\Middleware\MiddlewareInterface;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\TableGenerator\Component\Td;
 
 class ActionsMiddleware implements MiddlewareInterface 
 {
@@ -169,7 +169,7 @@ $tr->getParameters()->set('custom-data', 'value');
 Custom adapters can be created by implementing `AdapterInterface`:
 
 ```php
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\AdapterInterface;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\AdapterInterface;
 
 class CustomAdapter implements AdapterInterface 
 {

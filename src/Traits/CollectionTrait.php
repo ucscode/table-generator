@@ -1,6 +1,6 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
+namespace Ucscode\HtmlComponent\TableGenerator\Traits;
 
 trait CollectionTrait
 {

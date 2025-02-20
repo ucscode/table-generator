@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Component\Section;
+namespace Ucscode\HtmlComponent\TableGenerator\Test\Component\Section;
 
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Enums\NodeNameEnum;
 use Ucscode\UssElement\Node\ElementNode;

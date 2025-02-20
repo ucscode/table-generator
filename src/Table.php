@@ -1,17 +1,17 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator;
+namespace Ucscode\HtmlComponent\TableGenerator;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\ColGroupCollection;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TbodyCollection;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Caption;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\ColGroup;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tbody;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Tfoot;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Thead;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
+use Ucscode\HtmlComponent\TableGenerator\Collection\ColGroupCollection;
+use Ucscode\HtmlComponent\TableGenerator\Collection\TbodyCollection;
+use Ucscode\HtmlComponent\TableGenerator\Component\Caption;
+use Ucscode\HtmlComponent\TableGenerator\Component\ColGroup;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tfoot;
+use Ucscode\HtmlComponent\TableGenerator\Component\Thead;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\TableComponentInterface;
+use Ucscode\HtmlComponent\TableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\TableGenerator\Traits\TableComponentTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;

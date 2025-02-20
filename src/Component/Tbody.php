@@ -1,12 +1,12 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Component;
+namespace Ucscode\HtmlComponent\TableGenerator\Component;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Collection\TrCollection;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\TableComponentInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TrCollectionTrait;
+use Ucscode\HtmlComponent\TableGenerator\Collection\TrCollection;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\TableComponentInterface;
+use Ucscode\HtmlComponent\TableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\TableGenerator\Traits\TableComponentTrait;
+use Ucscode\HtmlComponent\TableGenerator\Traits\TrCollectionTrait;
 use Ucscode\UssElement\Collection\Attributes;
 use Ucscode\UssElement\Contracts\ElementInterface;
 use Ucscode\UssElement\Enums\NodeNameEnum;

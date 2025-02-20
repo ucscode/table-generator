@@ -1,11 +1,11 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Component\Section;
+namespace Ucscode\HtmlComponent\TableGenerator\Test\Component\Section;
 
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Td;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Th;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Component\Section\Tr;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 
 class TrTest extends TestCase
 {

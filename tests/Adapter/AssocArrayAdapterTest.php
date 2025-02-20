@@ -1,11 +1,11 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Adapter;
+namespace Ucscode\HtmlComponent\TableGenerator\Test\Adapter;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Adapter\AssocArrayAdapter;
+use Ucscode\HtmlComponent\TableGenerator\Adapter\AssocArrayAdapter;
 use Ucscode\Paginator\Paginator;
 
 class AssocArrayAdapterTest extends TestCase

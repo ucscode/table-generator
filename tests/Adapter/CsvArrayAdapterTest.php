@@ -1,11 +1,11 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Test\Adapter;
+namespace Ucscode\HtmlComponent\TableGenerator\Test\Adapter;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Adapter\CsvArrayAdapter;
+use Ucscode\HtmlComponent\TableGenerator\Adapter\CsvArrayAdapter;
 use Ucscode\Paginator\Paginator;
 
 class CsvArrayAdapterTest extends TestCase

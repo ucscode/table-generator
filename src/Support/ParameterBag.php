@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Support;
+namespace Ucscode\HtmlComponent\TableGenerator\Support;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CollectionInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\CollectionTrait;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\CollectionInterface;
+use Ucscode\HtmlComponent\TableGenerator\Traits\CollectionTrait;
 
 /**
  * Store custom information

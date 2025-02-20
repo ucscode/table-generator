@@ -1,6 +1,6 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Contracts;
+namespace Ucscode\HtmlComponent\TableGenerator\Contracts;
 
 interface CellInterface extends TableComponentInterface
 {

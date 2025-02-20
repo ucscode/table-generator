@@ -1,12 +1,12 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Abstraction;
+namespace Ucscode\HtmlComponent\TableGenerator\Abstraction;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\ArbitraryDataInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Contracts\CellInterface;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\TableComponentTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\DataTrait;
-use Ucscode\HtmlComponent\HtmlTableGenerator\Traits\RenderableTrait;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\ArbitraryDataInterface;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\CellInterface;
+use Ucscode\HtmlComponent\TableGenerator\Traits\TableComponentTrait;
+use Ucscode\HtmlComponent\TableGenerator\Traits\DataTrait;
+use Ucscode\HtmlComponent\TableGenerator\Traits\RenderableTrait;
 use Ucscode\UssElement\Collection\Attributes;
 
 abstract class AbstractCell implements CellInterface, ArbitraryDataInterface

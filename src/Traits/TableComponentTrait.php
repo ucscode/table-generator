@@ -1,8 +1,8 @@
 <?php
 
-namespace Ucscode\HtmlComponent\HtmlTableGenerator\Traits;
+namespace Ucscode\HtmlComponent\TableGenerator\Traits;
 
-use Ucscode\HtmlComponent\HtmlTableGenerator\Support\ParameterBag;
+use Ucscode\HtmlComponent\TableGenerator\Support\ParameterBag;
 
 trait TableComponentTrait
 {
