@@ -1,5 +1,5 @@
 {
-    "name": "ucscode/html-table-generator",
+    "name": "ucscode/table-generator",
     "description": "Lightweight PHP library that simplifies the process of creating tables with minimal code",
     "type": "library",
     "license": "MIT",
