@@ -35,7 +35,7 @@ class Table implements TableComponentInterface
         $this->attributes = $attributes instanceof Attributes ? $attributes : new Attributes($attributes);
     }
 
-    public function setCaption(Caption $caption): static
+    public function setCaption(?Caption $caption): static
     {
         $this->caption = $caption;
 
@@ -90,7 +90,7 @@ class Table implements TableComponentInterface
         return $this;
     }
 
-    public function setThead(Thead $thead): static
+    public function setThead(?Thead $thead): static
     {
         $this->thead = $thead;
 
@@ -109,7 +109,7 @@ class Table implements TableComponentInterface
         return $this;
     }
 
-    public function setTfoot(Tfoot $tfoot): static
+    public function setTfoot(?Tfoot $tfoot): static
     {
         $this->tfoot = $tfoot;
 

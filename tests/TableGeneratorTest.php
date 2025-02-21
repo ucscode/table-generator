@@ -3,11 +3,14 @@
 namespace Ucscode\HtmlComponent\TableGenerator\Test;
 
 use PHPUnit\Framework\TestCase;
+use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractMiddleware;
 use Ucscode\HtmlComponent\TableGenerator\Adapter\CsvArrayAdapter;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
-use Ucscode\HtmlComponent\TableGenerator\Contracts\MiddlewareInterface;
+use Ucscode\HtmlComponent\TableGenerator\Component\Tfoot;
+use Ucscode\HtmlComponent\TableGenerator\Contracts\TableSegmentInterface;
+use Ucscode\HtmlComponent\TableGenerator\Table;
 use Ucscode\HtmlComponent\TableGenerator\TableGenerator;
 use Ucscode\UssElement\Collection\Attributes;
 
@@ -56,17 +59,17 @@ class TableGeneratorTest extends TestCase
             new CsvArrayAdapter([
                 ['id'],
             ]),
-            new class () implements MiddlewareInterface {
-                public function alterTr(Tr $tr): Tr
+            new class () extends AbstractMiddleware {
+                public function process(Table $table): Table
                 {
-                    $positionIndex = $tr->getParameters()->get(TableGenerator::POSITION_INDEX);
+                    $this->iterateTrsIn($table, function(Tr $tr, TableSegmentInterface $segment) {
+                        if ($segment instanceof Tfoot) {
+                            $tr->getCell(0)->setData('transform');
+                            $tr->addCell(new Th('action'));
+                        }
+                    });
 
-                    if ($positionIndex === TableGenerator::SECTION_TFOOT) {
-                        $tr->getCell(0)->setData('transform');
-                        $tr->addCell(new Th('action'));
-                    }
-
-                    return $tr;
+                    return $table;
                 }
             },
             new Attributes([
@@ -87,27 +90,36 @@ class TableGeneratorTest extends TestCase
             [3, 'sammy'],
         ]);
 
-        $checkboxMiddleware = new class () implements MiddlewareInterface {
-            public function alterTr(Tr $tr): Tr
+        $checkboxMiddleware = new class () extends AbstractMiddleware {
+            public function process(Table $table): Table
             {
-                $tr->getCellCollection()->prepend(new Td('[x]'));
-                return $tr;
+                $this->iterateTrsIn($table, function(Tr $tr) {
+                    $tr->getCellCollection()->prepend(new Td('[x]'));
+                });
+
+                return $table;
             }
         };
 
-        $inlinerMiddleware = new class () implements MiddlewareInterface {
-            public function alterTr(Tr $tr): Tr
+        $inlinerMiddleware = new class () extends AbstractMiddleware {
+            public function process(Table $table): Table
             {
-                $tr->getCellCollection()->insertAt(2, new Td('inline'));
-                return $tr;
+                $this->iterateTrsIn($table, function(Tr $tr) {
+                    $tr->getCellCollection()->insertAt(2, new Td('inline'));
+                });
+
+                return $table;
             }
         };
 
-        $actionMiddleware = new class () implements MiddlewareInterface {
-            public function alterTr(Tr $tr): Tr
+        $actionMiddleware = new class () extends AbstractMiddleware {
+            public function process(Table $table): Table
             {
-                $tr->getCellCollection()->append(new Td('action'));
-                return $tr;
+                $this->iterateTrsIn($table, function(Tr $tr) {
+                    $tr->getCellCollection()->append(new Td('action'));
+                });
+
+                return $table;
             }
         };
 

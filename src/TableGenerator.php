@@ -3,7 +3,6 @@
 namespace Ucscode\HtmlComponent\TableGenerator;
 
 use Ucscode\HtmlComponent\TableGenerator\Collection\MiddlewareCollection;
-use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\TableGenerator\Component\Tfoot;
 use Ucscode\HtmlComponent\TableGenerator\Component\Thead;
@@ -14,11 +13,6 @@ use Ucscode\UssElement\Collection\Attributes;
 
 class TableGenerator implements \Stringable
 {
-    public const POSITION_INDEX = ':position';
-    public const SECTION_THEAD = 1;
-    public const SECTION_TBODY = 2;
-    public const SECTION_TFOOT = 3;
-
     protected ?Table $table = null;
     protected bool $tfootEnabled = false;
     protected MiddlewareCollection $middlewareCollection;
@@ -44,7 +38,7 @@ class TableGenerator implements \Stringable
 
     public function render(): string
     {
-        return $this->table->render();
+        return $this->getTable()->render();
     }
 
     public function getPaginator(): Paginator
@@ -117,34 +111,25 @@ class TableGenerator implements \Stringable
         // use existing table attributes
         $attributes ??= ($this->table?->getAttributes() ?? new Attributes());
 
-        $this->table = new Table($attributes);
+        $table = new Table($attributes);
 
-        $tr = $this->processMiddleware($this->adapter->getTheadTr(), self::SECTION_THEAD);
-        $thead = (new Thead())->addTr($tr);
-
-        if ($tr->getCellCollection()->count()) {
-            $this->table->setThead($thead);
+        if ($thead = $this->generateThead()) {
+            $table->setThead($thead);
         }
 
-        $tbody = new Tbody();
-
-        foreach ($this->adapter->getTbodyTrCollection() as $tr) {
-            $tr = $this->processMiddleware($tr, self::SECTION_TBODY);
-            $tbody->addTr($tr);
+        if ($tbody = $this->generateTbody()) {
+            $table->addTbody($tbody);
         }
 
-        if ($tbody->getTrCollection()->count()) {
-            $this->table->addTbody($tbody);
+        if ($tfoot = $this->generateTfoot()) {
+            $table->setTfoot($tfoot);
         }
 
-        if ($this->tfootEnabled) {
-            $tr = $this->processMiddleware($this->adapter->getTheadTr(), self::SECTION_TFOOT);
-            $tfoot = (new Tfoot())->addTr($tr);
-
-            if ($tr->getCellCollection()->count()) {
-                $this->table->setTfoot($tfoot);
-            }
+        foreach ($this->middlewareCollection as $middleware) {
+            $table = $middleware->process($table);
         }
+
+        $this->table = $table;
 
         return $this;
     }
@@ -168,13 +153,42 @@ class TableGenerator implements \Stringable
         $this->middlewareCollection = $middleware;
     }
 
-    protected function processMiddleware(Tr $tr, int $section): Tr
+    private function generateThead(): ?Thead
     {
-        foreach ($this->middlewareCollection as $middleware) {
-            $tr->getParameters()->set(self::POSITION_INDEX, $section);
-            $tr = $middleware->alterTr($tr);
+        $tr = $this->adapter->getTheadTr();
+
+        return !$tr->getCellCollection()->isEmpty() ? new Thead([$tr]) : null;
+    }
+
+    private function generateTbody(): ?Tbody
+    {
+        $trCollection = $this->adapter->getTbodyTrCollection();
+
+        if ($trCollection->isEmpty()) {
+            return null;
         }
 
-        return $tr;
+        $tbody = new Tbody();
+
+        foreach ($trCollection as $tr) {
+            if (!$tr->getCellCollection()->isEmpty()) {
+                $tbody->addTr($tr);
+            }
+        }
+
+        return $tbody->getTrCollection()->isEmpty() ? null : $tbody;
+    }
+
+    private function generateTfoot(): ?Tfoot
+    {
+        if ($this->isTfootEnabled()) {
+            $tr = $this->adapter->getTheadTr();
+
+            if (!$tr->getCellCollection()->isEmpty()) {
+                return new Tfoot([$tr]);
+            }
+        }
+
+        return null;
     }
 }

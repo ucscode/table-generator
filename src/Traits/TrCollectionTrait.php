@@ -25,7 +25,7 @@ trait TrCollectionTrait
         return $this;
     }
 
-    public function getTr(int $index): ?Tr
+    public function getTr(int $index = 0): ?Tr
     {
         return $this->trCollection->get($index);
     }

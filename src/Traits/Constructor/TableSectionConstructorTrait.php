@@ -6,7 +6,7 @@ use Ucscode\HtmlComponent\TableGenerator\Collection\TrCollection;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\UssElement\Collection\Attributes;
 
-trait TrConstructorTrait
+trait TableSectionConstructorTrait
 {
     /**
      * @param null|Tr[]|TrCollection $collection
