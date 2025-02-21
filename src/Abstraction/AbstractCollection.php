@@ -3,7 +3,6 @@
 namespace Ucscode\HtmlComponent\TableGenerator\Abstraction;
 
 use Ucscode\HtmlComponent\TableGenerator\Contracts\CollectionInterface;
-use Ucscode\HtmlComponent\TableGenerator\Exception\InvalidTableComponentException;
 use Ucscode\HtmlComponent\TableGenerator\Traits\CollectionTrait;
 
 /**
@@ -64,13 +63,50 @@ abstract class AbstractCollection implements CollectionInterface
      * @param TValue $item
      * @return static
      */
-    public function add(object $item): static
+    public function prepend(object $item): static
     {
         $this->applyTypeCheckConstraint($item);
 
-        if (!$this->has($item)) {
-            $this->items[] = $item;
+        if ($this->has($item)) {
+            $this->remove($item);
         }
+
+        array_unshift($this->items, $item);
+
+        return $this;
+    }
+
+    /**
+     * @param TValue $item
+     * @return static
+     */
+    public function append(object $item): static
+    {
+        $this->applyTypeCheckConstraint($item);
+
+        if ($this->has($item)) {
+            $this->remove($item);
+        }
+
+        $this->items[] = $item;
+
+        return $this;
+    }
+
+    /**
+     * @param integer $index
+     * @param TValue $item
+     * @return static
+     */
+    public function insertAt(int $index, object $item): static
+    {
+        $this->applyTypeCheckConstraint($item);
+
+        if ($this->has($item)) {
+            $this->remove($item);
+        }
+
+        array_splice($this->items, $index, 0, [$item]);
 
         return $this;
     }
@@ -87,7 +123,7 @@ abstract class AbstractCollection implements CollectionInterface
         }
 
         if ($item !== false) {
-            /** @var int $indexOrCell */
+            /** @var int $item */
             if (array_key_exists($item, $this->items)) {
                 unset($this->items[$item]);
                 $this->items = array_values($this->items);
@@ -98,8 +134,25 @@ abstract class AbstractCollection implements CollectionInterface
     }
 
     /**
+     * @return TValue|null
+     */
+    public function first(): ?object
+    {
+        return $this->get(0);
+    }
+
+    /**
+     * @return TValue|null
+     */
+    public function last(): ?object
+    {
+        return $this->get(count($this->items) - 1);
+    }
+
+    /**
      * @param TValue $item
      * @return void
+     * @throws \InvalidArgumentException If invalid object type is received
      */
     protected function applyTypeCheckConstraint(mixed $item): void
     {

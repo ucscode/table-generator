@@ -46,7 +46,7 @@ class DoctrineORMAdapter extends AbstractAdapter
                 $tr->addCell(new Td($cell));
             }
 
-            $tbodyRows->add($tr);
+            $tbodyRows->append($tr);
         }
 
         return $tbodyRows;

@@ -33,7 +33,7 @@ class ColGroup implements TableComponentInterface
 
     public function addCol(Col $col): static
     {
-        $this->colCollection->add($col);
+        $this->colCollection->append($col);
 
         return $this;
     }

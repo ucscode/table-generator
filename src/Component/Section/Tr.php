@@ -37,7 +37,7 @@ class Tr implements TableComponentInterface
 
     public function addCell(CellInterface $cell): static
     {
-        $this->cellCollection->add($cell);
+        $this->cellCollection->append($cell);
 
         return $this;
     }

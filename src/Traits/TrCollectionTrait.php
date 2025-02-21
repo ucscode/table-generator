@@ -20,7 +20,7 @@ trait TrCollectionTrait
 
     public function addTr(Tr $tr): static
     {
-        $this->trCollection->add($tr);
+        $this->trCollection->append($tr);
 
         return $this;
     }

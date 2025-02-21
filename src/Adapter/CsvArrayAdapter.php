@@ -19,7 +19,7 @@ class CsvArrayAdapter extends AbstractAdapter
     {
         $thead = new Tr();
 
-        foreach ($this->data[0] as $value) {
+        foreach ($this->data[0] ?? [] as $value) {
             $thead->addCell(new Th($value));
         }
 
@@ -43,7 +43,7 @@ class CsvArrayAdapter extends AbstractAdapter
                 $tr->addCell(new Td($value));
             }
 
-            $tbodyRows->add($tr);
+            $tbodyRows->append($tr);
         }
 
         return $tbodyRows;

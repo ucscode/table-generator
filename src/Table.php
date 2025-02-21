@@ -68,7 +68,7 @@ class Table implements TableComponentInterface
 
     public function addColGroup(ColGroup $colGroup): static
     {
-        $this->colGroupCollection->add($colGroup);
+        $this->colGroupCollection->append($colGroup);
 
         return $this;
     }
@@ -142,7 +142,7 @@ class Table implements TableComponentInterface
 
     public function addTbody(Tbody $tbody): static
     {
-        $this->tbodyCollection->add($tbody);
+        $this->tbodyCollection->append($tbody);
 
         return $this;
     }

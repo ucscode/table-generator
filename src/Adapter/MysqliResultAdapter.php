@@ -47,7 +47,7 @@ class MysqliResultAdapter extends AbstractAdapter
                 $tr->addCell(new Td($value));
             }
 
-            $tbodyRows->add($tr);
+            $tbodyRows->append($tr);
         }
 
         return $tbodyRows;

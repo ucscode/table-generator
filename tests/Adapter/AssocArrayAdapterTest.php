@@ -82,7 +82,7 @@ class AssocArrayAdapterTest extends TestCase
         $this->assertSame($assocAdapter->getTbodyTrCollection()->get(0)?->getCell(1)?->getData(), $data[1]);
     }
 
-    protected function paginatorProvider(): array
+    public static function paginatorProvider(): array
     {
         return [
             [null, 8, [1, 'John Doe']],

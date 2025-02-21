@@ -4,6 +4,7 @@ namespace Ucscode\HtmlComponent\TableGenerator\Test;
 
 use PHPUnit\Framework\TestCase;
 use Ucscode\HtmlComponent\TableGenerator\Adapter\CsvArrayAdapter;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\HtmlComponent\TableGenerator\Contracts\MiddlewareInterface;
@@ -76,5 +77,63 @@ class TableGeneratorTest extends TestCase
         $htmlTableGenerator->setTfootEnabled(true)->regenerate();
 
         $this->assertSame($htmlTableGenerator->render(), '<table class="block-buster"><thead><tr><th>id</th></tr></thead><tfoot><tr><th>transform</th><th>action</th></tr></tfoot></table>');
+    }
+
+    public function testHtmlTableWithMultipleMiddlewares(): void
+    {
+        $adapter = new CsvArrayAdapter([
+            ['id', 'username'],
+            [1, 'johndoe'],
+            [3, 'sammy'],
+        ]);
+
+        $checkboxMiddleware = new class () implements MiddlewareInterface {
+            public function alterTr(Tr $tr): Tr
+            {
+                $tr->getCellCollection()->prepend(new Td('[x]'));
+                return $tr;
+            }
+        };
+
+        $inlinerMiddleware = new class () implements MiddlewareInterface {
+            public function alterTr(Tr $tr): Tr
+            {
+                $tr->getCellCollection()->insertAt(2, new Td('inline'));
+                return $tr;
+            }
+        };
+
+        $actionMiddleware = new class () implements MiddlewareInterface {
+            public function alterTr(Tr $tr): Tr
+            {
+                $tr->getCellCollection()->append(new Td('action'));
+                return $tr;
+            }
+        };
+
+        $tableGenerator = new TableGenerator($adapter, [
+            $checkboxMiddleware,
+            $inlinerMiddleware,
+        ]);
+
+        $tableGenerator->addMiddleware($actionMiddleware);
+
+        $middlewareCollection = $tableGenerator->getMiddlewareCollection();
+
+        $this->assertCount(3, $middlewareCollection);
+        $this->assertSame($middlewareCollection->get(1), $inlinerMiddleware);
+        $this->assertSame($middlewareCollection->last(), $actionMiddleware);
+
+        $theadTr = '<tr><td>[x]</td><th>id</th><td>inline</td><th>username</th><td>action</td></tr>';
+        $tbodyTr = '<tr><td>[x]</td><td>1</td><td>inline</td><td>johndoe</td><td>action</td></tr>';
+        $tbodyTr2 = '<tr><td>[x]</td><td>3</td><td>inline</td><td>sammy</td><td>action</td></tr>';
+
+        $formation = sprintf('<table><thead>%s</thead><tbody>%s%s</tbody></table>', $theadTr, $tbodyTr, $tbodyTr2);
+
+        $this->assertNotSame($formation, $tableGenerator->render());
+
+        $tableGenerator->regenerate();
+
+        $this->assertSame($formation, $tableGenerator->render());
     }
 }

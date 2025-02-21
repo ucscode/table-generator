@@ -90,7 +90,7 @@ class TableGenerator implements \Stringable
 
     public function addMiddleware(MiddlewareInterface $middleware): static
     {
-        $this->middlewareCollection->add($middleware);
+        $this->middlewareCollection->append($middleware);
 
         return $this;
     }

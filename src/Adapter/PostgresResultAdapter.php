@@ -40,7 +40,7 @@ class PostgresResultAdapter extends AbstractAdapter
                 $tr->addCell(new Td($cell));
             }
 
-            $tbodyRows->add($tr);
+            $tbodyRows->append($tr);
         }
 
         return $tbodyRows;
