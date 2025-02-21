@@ -132,7 +132,7 @@ class TableGeneratorTest extends TestCase
 
         $this->assertNotSame($formation, $tableGenerator->render());
 
-        $tableGenerator->regenerate();
+        $tableGenerator->regenerate(); //
 
         $this->assertSame($formation, $tableGenerator->render());
     }
