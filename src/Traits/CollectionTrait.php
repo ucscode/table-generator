@@ -2,10 +2,19 @@
 
 namespace Ucscode\HtmlComponent\TableGenerator\Traits;
 
+/**
+ * @template TValue
+ */
 trait CollectionTrait
 {
+    /**
+     * @var TValue[]
+     */
     protected array $items = [];
 
+    /**
+     * @return TValue[]
+     */
     public function toArray(): array
     {
         return $this->items;

@@ -128,7 +128,7 @@ class TableGenerator implements \Stringable
 
         $tbody = new Tbody();
 
-        foreach ($this->adapter->getTbodyTrCollection()->toArray() as $tr) {
+        foreach ($this->adapter->getTbodyTrCollection() as $tr) {
             $tr = $this->processMiddleware($tr, self::SECTION_TBODY);
             $tbody->addTr($tr);
         }
@@ -170,7 +170,7 @@ class TableGenerator implements \Stringable
 
     protected function processMiddleware(Tr $tr, int $section): Tr
     {
-        foreach ($this->middlewareCollection->toArray() as $middleware) {
+        foreach ($this->middlewareCollection as $middleware) {
             $tr->getParameters()->set(self::POSITION_INDEX, $section);
             $tr = $middleware->alterTr($tr);
         }
