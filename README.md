@@ -103,19 +103,22 @@ Middleware allows modification of table rows before rendering. This is useful wh
 ### Example: Adding an "Actions" Column
 
 ```php
-use Ucscode\HtmlComponent\TableGenerator\Middleware\MiddlewareInterface;
+use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractMiddleware;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\HtmlComponent\TableGenerator\Component\Td;
 
-class ActionsMiddleware implements MiddlewareInterface 
+class ActionsMiddleware extends AbstractMiddleware
 {
-    public function alterTr(Tr $tr): Tr 
+    public function process(Table $table): Table 
     {
-        $actions = new Td('<a href="#">Edit</a> | <a href="#">Delete</a>');
+        $table->getAttributes()->set('class', 'table table-striped');
 
-        $tr->addCell($actions);
+        $this->iterateTrsIn($table, function(Tr $tr) {
+            $actions = new Td('<a href="#">Edit</a> | <a href="#">Delete</a>');
+            $tr->addCell($actions);
+        });
 
-        return $tr;
+        return $table;
     }
 }
 ```
