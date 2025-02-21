@@ -13,7 +13,9 @@ class CellCollection extends AbstractCollection
 {
     public function add(CellInterface $cell): static
     {
-        $this->items[] = $cell;
+        if (!$this->has($cell)) {
+            $this->items[] = $cell;
+        }
 
         return $this;
     }

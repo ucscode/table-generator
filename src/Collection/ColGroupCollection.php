@@ -13,7 +13,9 @@ class ColGroupCollection extends AbstractCollection
 {
     public function add(ColGroup $colGroup): static
     {
-        $this->items[] = $colGroup;
+        if (!$this->has($colGroup)) {
+            $this->items[] = $colGroup;
+        }
 
         return $this;
     }

@@ -13,7 +13,9 @@ class ColCollection extends AbstractCollection
 {
     public function add(Col $col): static
     {
-        $this->items[] = $col;
+        if (!$this->has($col)) {
+            $this->items[] = $col;
+        }
 
         return $this;
     }

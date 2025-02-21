@@ -2,6 +2,8 @@
 
 namespace Ucscode\HtmlComponent\TableGenerator;
 
+use Ucscode\HtmlComponent\TableGenerator\Collection\MiddlewareCollection;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\TableGenerator\Component\Tfoot;
 use Ucscode\HtmlComponent\TableGenerator\Component\Thead;
@@ -19,12 +21,14 @@ class TableGenerator implements \Stringable
 
     protected ?Table $table = null;
     protected bool $tfootEnabled = false;
+    protected MiddlewareCollection $middlewareCollection;
 
     public function __construct(
         protected AdapterInterface $adapter,
-        protected ?MiddlewareInterface $middleware = null,
+        null|MiddlewareInterface|array|MiddlewareCollection $middleware = null,
         null|array|Attributes $attributes = null
     ) {
+        $this->initializeMiddleware($middleware);
         $this->regenerate($attributes);
     }
 
@@ -72,47 +76,60 @@ class TableGenerator implements \Stringable
         return $this->adapter;
     }
 
-    public function setMiddleware(?MiddlewareInterface $middleware): static
+    public function setMiddlewareCollection(MiddlewareCollection $middlewareCollection): static
     {
-        $this->middleware = $middleware;
+        $this->middlewareCollection = $middlewareCollection;
 
         return $this;
     }
 
-    public function getMiddleware(): ?MiddlewareInterface
+    public function getMiddlewareCollection(): MiddlewareCollection
     {
-        return $this->middleware;
+        return $this->middlewareCollection;
+    }
+
+    public function addMiddleware(MiddlewareInterface $middleware): static
+    {
+        $this->middlewareCollection->add($middleware);
+
+        return $this;
+    }
+
+    public function removeMiddleware(MiddlewareInterface $middleware): static
+    {
+        $this->middlewareCollection->remove($middleware);
+
+        return $this;
+    }
+
+    public function hasMiddleware(MiddlewareInterface $middleware): bool
+    {
+        return $this->middlewareCollection->has($middleware);
+    }
+
+    public function getMiddleware(int $index): ?MiddlewareInterface
+    {
+        return $this->middlewareCollection->get($index);
     }
 
     final public function regenerate(null|array|Attributes $attributes = null): static
     {
-        if ($attributes === null) {
-            $attributes = $this->table?->getAttributes() ?? new Attributes();
-        }
+        // use existing table attributes
+        $attributes ??= ($this->table?->getAttributes() ?? new Attributes());
 
         $this->table = new Table($attributes);
 
-        $tr = $this->adapter->getTheadTr();
-        $tr->getParameters()->set(self::POSITION_INDEX, self::SECTION_THEAD);
-
-        if ($this->middleware) {
-            $tr = $this->middleware->alterTr($tr);
-        }
+        $tr = $this->processMiddleware($this->adapter->getTheadTr(), self::SECTION_THEAD);
+        $thead = (new Thead())->addTr($tr);
 
         if ($tr->getCellCollection()->count()) {
-            $thead = (new Thead())->addTr($tr);
             $this->table->setThead($thead);
         }
 
         $tbody = new Tbody();
 
         foreach ($this->adapter->getTbodyTrCollection()->toArray() as $tr) {
-            $tr->getParameters()->set(self::POSITION_INDEX, self::SECTION_TBODY);
-
-            if ($this->middleware) {
-                $tr = $this->middleware->alterTr($tr);
-            }
-
+            $tr = $this->processMiddleware($tr, self::SECTION_TBODY);
             $tbody->addTr($tr);
         }
 
@@ -121,19 +138,43 @@ class TableGenerator implements \Stringable
         }
 
         if ($this->tfootEnabled) {
-            $tr = $this->adapter->getTheadTr();
-            $tr->getParameters()->set(self::POSITION_INDEX, self::SECTION_TFOOT);
-
-            if ($this->middleware) {
-                $tr = $this->middleware->alterTr($tr);
-            }
+            $tr = $this->processMiddleware($this->adapter->getTheadTr(), self::SECTION_TFOOT);
+            $tfoot = (new Tfoot())->addTr($tr);
 
             if ($tr->getCellCollection()->count()) {
-                $tfoot = (new Tfoot())->addTr($tr);
                 $this->table->setTfoot($tfoot);
             }
         }
 
         return $this;
+    }
+
+    protected function initializeMiddleware(null|MiddlewareInterface|array|MiddlewareCollection $middleware = null): void
+    {
+        if ($middleware === null) {
+            $middleware = new MiddlewareCollection();
+        }
+
+        if (is_array($middleware)) {
+            $middleware = new MiddlewareCollection($middleware);
+        }
+
+        if ($middleware instanceof MiddlewareInterface) {
+            $middleware = new MiddlewareCollection([
+                $middleware,
+            ]);
+        }
+
+        $this->middlewareCollection = $middleware;
+    }
+
+    protected function processMiddleware(Tr $tr, int $section): Tr
+    {
+        foreach ($this->middlewareCollection->toArray() as $middleware) {
+            $tr->getParameters()->set(self::POSITION_INDEX, $section);
+            $tr = $middleware->alterTr($tr);
+        }
+
+        return $tr;
     }
 }

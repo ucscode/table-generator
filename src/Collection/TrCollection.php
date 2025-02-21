@@ -13,7 +13,9 @@ class TrCollection extends AbstractCollection
 {
     public function add(Tr $tr): static
     {
-        $this->items[] = $tr;
+        if (!$this->has($tr)) {
+            $this->items[] = $tr;
+        }
 
         return $this;
     }

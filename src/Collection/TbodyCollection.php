@@ -13,7 +13,9 @@ class TbodyCollection extends AbstractCollection
 {
     public function add(Tbody $tbody): static
     {
-        $this->items[] = $tbody;
+        if (!$this->has($tbody)) {
+            $this->items[] = $tbody;
+        }
 
         return $this;
     }
