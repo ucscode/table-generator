@@ -8,12 +8,12 @@ Table Generator is a powerful yet flexible PHP library that allows you to create
 
 ## Features
 
-- **Adapter System** – Convert various data structures (MySQL result, CSV, JSON, Doctrine, etc.) into tables.
-- **Pagination Support** – Easily paginate large datasets using [ucscode/easy-paginator](https://github.com/ucscode/easy-paginator).
-- **Middleware Customization** – Modify table rows dynamically (e.g., add action buttons, hide sensitive data).
-- **Modular Components** – Each table element (thead, tbody, tr, td, etc.) is an instance, allowing for full customization.
-- **Parameter Bags** – Store temporary values that affect rendering without exposing them as HTML attributes.
-- **DOM Manipulation with UssElement** – Directly set attributes, classes, or IDs on table elements.
+- **Adapter System** &mdash; Convert various data structures (MySQL result, CSV, JSON, Doctrine, etc.) into tables.
+- **Pagination Support** &mdash; Easily paginate large datasets using [ucscode/easy-paginator](https://github.com/ucscode/easy-paginator).
+- **Middleware Customization** &mdash; Modify table rows dynamically (e.g., add action buttons, hide sensitive data).
+- **Modular Components** &mdash; Each table element (thead, tbody, tr, td, etc.) is an instance, allowing for full customization.
+- **Meta** &mdash; Store temporary values without exposing them as HTML attributes.
+- **DOM Manipulation with UssElement** &mdash; Directly set attributes, classes, or IDs on table elements.
 
 ## Installation
 
@@ -56,11 +56,11 @@ Adapters are responsible for structuring data into an HTML table. Each adapter c
 
 ### Available Adapters
 
-- **CsvArrayAdapter** – Converts a 2D array (CSV-like data) into a table.
-- **AssocArrayAdapter** – Uses associative arrays where the keys become the table headers.
-- **MysqliResultAdapter** – Transforms a MySQLi result object into a table.
-- **DoctrineORMAdapter** – Converts Doctrine ORM result sets.
-- **DoctrineDBALAdapter** – Converts Doctrine DBAL query results.
+- **CsvArrayAdapter** &mdash; Converts a 2D array (CSV-like data) into a table.
+- **AssocArrayAdapter** &mdash; Uses associative arrays where the keys become the table headers.
+- **MysqliResultAdapter** &mdash; Transforms a MySQLi result object into a table.
+- **DoctrineORMAdapter** &mdash; Converts Doctrine ORM result sets.
+- **DoctrineDBALAdapter** &mdash; Converts Doctrine DBAL query results.
 
 ### Example: Using a MySQLi Adapter
 
@@ -159,12 +159,12 @@ $table->addThead($thead);
 echo $table->render();
 ```
 
-## Parameter Bags
+## Meta
 
-Parameter Bags store metadata that neither affects table rendering nor appear in the HTML output.
+The `Meta` instance store metadata that neither affects table rendering nor appear in the HTML output.
 
 ```php
-$tr->getParameters()->set('custom-data', 'value');
+$tr->getMeta()->set('shared-data', 'value');
 ```
 
 ## Customization

@@ -2,18 +2,14 @@
 
 namespace Ucscode\HtmlComponent\TableGenerator\Traits;
 
-use Ucscode\HtmlComponent\TableGenerator\Support\ParameterBag;
+use Ucscode\HtmlComponent\TableGenerator\Support\Meta;
 
 trait TableComponentTrait
 {
-    private ?ParameterBag $parameters = null;
+    protected ?Meta $meta = null;
 
-    public function getParameters(): ParameterBag
+    public function getMeta(): Meta
     {
-        if ($this->parameters === null) {
-            $this->parameters = new ParameterBag();
-        }
-
-        return $this->parameters;
+        return $this->meta ??= new Meta();
     }
 }

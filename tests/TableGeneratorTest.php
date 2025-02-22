@@ -62,7 +62,7 @@ class TableGeneratorTest extends TestCase
             new class () extends AbstractMiddleware {
                 public function process(Table $table): Table
                 {
-                    $this->iterateTrsIn($table, function(Tr $tr, TableSegmentInterface $segment) {
+                    $this->iterateTrsIn($table, function (Tr $tr, TableSegmentInterface $segment) {
                         if ($segment instanceof Tfoot) {
                             $tr->getCell(0)->setData('transform');
                             $tr->addCell(new Th('action'));
@@ -93,7 +93,7 @@ class TableGeneratorTest extends TestCase
         $checkboxMiddleware = new class () extends AbstractMiddleware {
             public function process(Table $table): Table
             {
-                $this->iterateTrsIn($table, function(Tr $tr) {
+                $this->iterateTrsIn($table, function (Tr $tr) {
                     $tr->getCellCollection()->prepend(new Td('[x]'));
                 });
 
@@ -104,7 +104,7 @@ class TableGeneratorTest extends TestCase
         $inlinerMiddleware = new class () extends AbstractMiddleware {
             public function process(Table $table): Table
             {
-                $this->iterateTrsIn($table, function(Tr $tr) {
+                $this->iterateTrsIn($table, function (Tr $tr) {
                     $tr->getCellCollection()->insertAt(2, new Td('inline'));
                 });
 
@@ -115,7 +115,7 @@ class TableGeneratorTest extends TestCase
         $actionMiddleware = new class () extends AbstractMiddleware {
             public function process(Table $table): Table
             {
-                $this->iterateTrsIn($table, function(Tr $tr) {
+                $this->iterateTrsIn($table, function (Tr $tr) {
                     $tr->getCellCollection()->append(new Td('action'));
                 });
 
