@@ -23,7 +23,11 @@ class PostgresResultAdapter extends AbstractAdapter
         $numFields = pg_num_fields($this->result);
 
         for ($i = 0; $i < $numFields; $i++) {
-            $thead->addCell(new Th(pg_field_name($this->result, $i)));
+            $columnName = pg_field_name($this->result, $i);
+            $cell = new Th();
+            $cell->getMeta()->set('cellValue', $columnName);
+            $cell->setData(ucwords(str_replace('_', ' ', $columnName)));
+            $thead->addCell($cell);
         }
 
         return $thead;
@@ -36,8 +40,10 @@ class PostgresResultAdapter extends AbstractAdapter
         while ($row = pg_fetch_assoc($this->result)) {
             $tr = new Tr();
 
-            foreach ($row as $cell) {
-                $tr->addCell(new Td($cell));
+            foreach ($row as $value) {
+                $cell = new Td($value);
+                $cell->getMeta()->set('cellValue', $value);
+                $tr->addCell($cell);
             }
 
             $tbodyRows->append($tr);

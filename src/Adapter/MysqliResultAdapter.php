@@ -21,7 +21,10 @@ class MysqliResultAdapter extends AbstractAdapter
 
         if ($firstRow = $this->data->fetch_assoc()) {
             foreach (array_keys($firstRow) as $columnName) {
-                $thead->addCell(new Th($columnName));
+                $cell = new Th();
+                $cell->getMeta()->set('cellValue', $columnName);
+                $cell->setData(ucwords(str_replace('_', ' ', $columnName)));
+                $thead->addCell($cell);
             }
         }
 
@@ -44,7 +47,9 @@ class MysqliResultAdapter extends AbstractAdapter
             $tr = new Tr();
 
             foreach ($row as $value) {
-                $tr->addCell(new Td($value));
+                $cell = new Td($value);
+                $cell->getMeta()->set('cellValue', $value);
+                $tr->addCell($cell);
             }
 
             $tbodyRows->append($tr);

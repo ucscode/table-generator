@@ -20,7 +20,10 @@ class AssocArrayAdapter extends AbstractAdapter
         $thead = new Tr();
 
         foreach (array_keys($this->data[0]) as $value) {
-            $thead->addCell(new Th($value));
+            $cell = new Th();
+            $cell->getMeta()->set('cellValue', $value);
+            $cell->setData(ucwords(str_replace('_', ' ', $value)));
+            $thead->addCell($cell);
         }
 
         return $thead;
@@ -39,8 +42,10 @@ class AssocArrayAdapter extends AbstractAdapter
         foreach ($data as $row) {
             $tr = new Tr();
 
-            foreach ($row as $cell) {
-                $tr->addCell(new Td($cell));
+            foreach ($row as $value) {
+                $cell = new Td($value);
+                $cell->getMeta()->set('cellValue', $value);
+                $tr->addCell($cell);
             }
 
             $tbodyRows->append($tr);

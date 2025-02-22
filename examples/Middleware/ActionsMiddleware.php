@@ -2,6 +2,7 @@
 
 use Ucscode\HtmlComponent\TableGenerator\Abstraction\AbstractMiddleware;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
+use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 use Ucscode\HtmlComponent\TableGenerator\Component\Tbody;
 use Ucscode\HtmlComponent\TableGenerator\Contracts\TableSegmentInterface;
@@ -18,7 +19,7 @@ class ActionsMiddleware extends AbstractMiddleware
             if ($segment instanceof Tbody) {
                 $td = new Td($this->createActions($tr));
             } else {
-                $td = new Td('Action');
+                $td = new Th('Action');
             }
 
             $tr->addCell($td);
