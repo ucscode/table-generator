@@ -12,7 +12,7 @@ Table Generator is a powerful yet flexible PHP library that allows you to create
 - **Pagination Support** &mdash; Easily paginate large datasets using [ucscode/easy-paginator](https://github.com/ucscode/easy-paginator).
 - **Middleware Customization** &mdash; Modify table rows dynamically (e.g., add action buttons, hide sensitive data).
 - **Modular Components** &mdash; Each table element (thead, tbody, tr, td, etc.) is an instance, allowing for full customization.
-- **Meta** &mdash; Store temporary values without exposing them as HTML attributes.
+- **Meta** &mdash; Store temporary values without exposing them in HTML.
 - **DOM Manipulation with UssElement** &mdash; Directly set attributes, classes, or IDs on table elements.
 
 ## Installation
@@ -184,7 +184,7 @@ class CustomAdapter implements AdapterInterface
 
 ---
 
-For more details, see the full documentation.
+For more details, see the [full documentation](http://tablegenerator.ucscode.com).
 
 ---
 
@@ -196,3 +196,4 @@ This package is licensed under the MIT License.
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
+If the project was helpful to you, please add a star

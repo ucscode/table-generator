@@ -36,9 +36,9 @@ class TableGenerator implements \Stringable
         return $this->table;
     }
 
-    public function render(): string
+    public function render(?int $indent = null): string
     {
-        return $this->getTable()->render();
+        return $this->getTable()->render($indent);
     }
 
     public function getPaginator(): Paginator
