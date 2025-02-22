@@ -46,7 +46,7 @@ echo $htmlTableGenerator->render();
 2. [Pagination](#pagination)
 3. [Middleware](#middleware)
 4. [Table Components](#table-components)
-5. [Parameter Bags](#parameter-bags)
+5. [Meta](#meta)
 6. [Customization](#customization)
 7. [Interactive Example](#interactive-example)
 
