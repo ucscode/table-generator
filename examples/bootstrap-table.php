@@ -22,7 +22,7 @@ $tableGenerator = new TableGenerator($adapter, $bootstrapMiddleware);
     <body>
         <h3 class="mb-4">Bootstrap Table Example</h3>
         <div>
-            <?php echo $tableGenerator->render(0); ?>
+            <?php echo $tableGenerator->render(1); ?>
         </div>
     </body>
 </html>

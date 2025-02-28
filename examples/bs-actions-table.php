@@ -28,7 +28,7 @@ $tableGenerator = new TableGenerator($adapter, [
     <body>
         <h3 class="mb-4">Actions (Middleware) Table Example</h3>
         <div>
-            <?php echo $tableGenerator->render(0); ?>
+            <?php echo $tableGenerator->render(1); ?>
         </div>
     </body>
 </html>
