@@ -17,7 +17,7 @@ class CsvArrayAdapter extends AbstractAdapter
 {
     public function getTheadTr(): Tr
     {
-        $thead = new Tr();
+        $theadTr = new Tr();
 
         foreach ($this->data[0] ?? [] as $value) {
             $cell = new Th();
@@ -25,17 +25,17 @@ class CsvArrayAdapter extends AbstractAdapter
                 ->set('originalValue', $value)
                 ->set('columnName', $value)
             ;
-            $cell->setData(ucwords(str_replace('_', ' ', $value)));
-            $thead->addCell($cell);
+            $cell->setData($this->toTitleCase($value));
+            $theadTr->addCell($cell);
         }
 
-        return $thead;
+        return $theadTr;
     }
 
     public function getTbodyTrCollection(): TrCollection
     {
         $headTr = $this->getTheadTr();
-        $tbodyRows = new TrCollection();
+        $trCollection = new TrCollection();
 
         $data = array_slice(
             $this->data,
@@ -49,23 +49,23 @@ class CsvArrayAdapter extends AbstractAdapter
             foreach (array_values($row) as $key => $value) {
                 /**
                  * Get Th that matches the same index as the Td
-                 * @var ?Th $headerCell
+                 * @var ?Th $headCell
                  */
-                $headerCell = $headTr->getCellCollection()->get($key);
+                $headCell = $headTr->getCellCollection()->get($key);
 
                 $cell = new Td($value);
                 $cell->getMeta()
                     ->set('originalValue', $value)
-                    ->set('columnName', $headerCell?->getMeta()->get('columnName'))
+                    ->set('columnName', $headCell?->getMeta()->get('columnName'))
                 ;
 
                 $tr->addCell($cell);
             }
 
-            $tbodyRows->append($tr);
+            $trCollection->append($tr);
         }
 
-        return $tbodyRows;
+        return $trCollection;
     }
 
     protected function initialize(): void

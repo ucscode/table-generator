@@ -47,7 +47,7 @@ class CsvArrayAdapterTest extends TestCase
         $this->assertSame($csvAdapter->getTbodyTrCollection()->get(0)?->getCell(0)?->getData(), $data[0]);
         $this->assertSame($csvAdapter->getTbodyTrCollection()->get(0)?->getCell(1)?->getData(), $data[1]);
     }
-    
+
     public function testColumnNames(): void
     {
         $assocAdapter = new CsvArrayAdapter(self::CSV_DATA);

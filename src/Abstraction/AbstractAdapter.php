@@ -22,4 +22,12 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         return $this->paginator;
     }
+
+    protected function toTitleCase(string $value): string
+    {
+        $value = str_replace('_', ' ', $value);
+        $value = preg_replace('/(?<!\s)([A-Z])/', ' $1', $value);
+
+        return ucwords(trim($value));
+    }
 }

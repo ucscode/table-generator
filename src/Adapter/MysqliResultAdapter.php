@@ -15,7 +15,7 @@ class MysqliResultAdapter extends AbstractAdapter
 {
     public function getTheadTr(): Tr
     {
-        $thead = new Tr();
+        $theadTr = new Tr();
 
         $this->data->data_seek(0); // Reset pointer
 
@@ -26,25 +26,28 @@ class MysqliResultAdapter extends AbstractAdapter
                     ->set('originalValue', $columnName)
                     ->set('columnName', $columnName)
                 ;
-                $cell->setData(ucwords(str_replace('_', ' ', $columnName)));
-                $thead->addCell($cell);
+                $cell->setData($this->toTitleCase($columnName));
+                $theadTr->addCell($cell);
             }
         }
 
-        return $thead;
+        return $theadTr;
     }
 
     public function getTbodyTrCollection(): TrCollection
     {
         $headTr = $this->getTheadTr();
-        $tbodyRows = new TrCollection();
+        $trCollection = new TrCollection();
+        $trIndex = 0;
 
+        // Adjusts the result pointer to the index of the first item in the current page
         $this->data->data_seek($this->paginator->getCurrentPageOffset());
 
-        for ($i = 0; $i < $this->paginator->getItemsPerPage(); $i++) {
-            $row = $this->data->fetch_assoc();
+        // Proceed with fetching the rest of the items
+        while ($row = $this->data->fetch_assoc()) {
 
-            if (!$row) {
+            // If rows in the TrCollection is up to the items required per page, stop the iteration
+            if ($trIndex >= $this->paginator->getItemsPerPage()) {
                 break;
             }
 
@@ -53,23 +56,26 @@ class MysqliResultAdapter extends AbstractAdapter
             foreach (array_values($row) as $key => $value) {
                 /**
                  * Get Th that matches the same index as the Td
-                 * @var ?Th $headerCell
+                 * @var ?Th $headCell
                  */
-                $headerCell = $headTr->getCellCollection()->get($key);
+                $headCell = $headTr->getCellCollection()->get($key);
 
                 $cell = new Td($value);
                 $cell->getMeta()
                     ->set('originalValue', $value)
-                    ->set('columnName', $headerCell?->getMeta()->get('columnName'))
+                    ->set('columnName', $headCell?->getMeta()->get('columnName'))
                 ;
 
                 $tr->addCell($cell);
             }
 
-            $tbodyRows->append($tr);
+            $trCollection->append($tr);
+
+            // Increase the item index number
+            $trIndex++;
         }
 
-        return $tbodyRows;
+        return $trCollection;
     }
 
     protected function initialize(): void
@@ -78,6 +84,13 @@ class MysqliResultAdapter extends AbstractAdapter
             throw new \InvalidArgumentException(
                 sprintf('Data must be an instance of mysqli_result, %s given', get_debug_type($this->data))
             );
+        }
+
+        // When stubbing, mysqli_result will always throw error "MockObject... is already closed"
+        // So we need to set the total items of the Paginator before passing it to the __construct() method
+
+        if (get_class($this->data) !== \mysqli_result::class) {
+            return;
         }
 
         $this->paginator->setTotalItems($this->data->num_rows);

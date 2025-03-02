@@ -31,7 +31,7 @@ class TableGeneratorTest extends TestCase
         $htmlTableGenerator = new TableGenerator(new CsvArrayAdapter([
             ['id', 'name']
         ]));
-        
+
         $this->assertSame(
             '<table><thead><tr><th>Id</th><th>Name</th></tr></thead></table>',
             $htmlTableGenerator->render()
@@ -156,7 +156,7 @@ class TableGeneratorTest extends TestCase
         $tbodyTr2 = '<tr><td>[x]</td><td>3</td><td>inline</td><td>sammy</td><td>action</td></tr>';
 
         $formation = sprintf('<table><thead>%s</thead><tbody>%s%s</tbody></table>', $theadTr, $tbodyTr, $tbodyTr2);
-        
+
         $this->assertNotSame($formation, $tableGenerator->render());
 
         $tableGenerator->regenerate(); //

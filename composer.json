@@ -30,6 +30,7 @@
         "phpstan/phpstan": "^2.1"
     },
     "scripts": {
-        "test": "vendor/bin/phpunit --display-deprecations --display-warnings --display-notices --display-phpunit-deprecations"
+        "test": "vendor/bin/phpunit --display-deprecations --display-warnings --display-notices --display-phpunit-deprecations",
+        "analyse": "vendor/bin/phpstan analyse"
     }
 }
