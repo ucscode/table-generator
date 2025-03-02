@@ -59,8 +59,8 @@ Adapters are responsible for structuring data into an HTML table. Each adapter c
 - **CsvArrayAdapter** &mdash; Converts a 2D array (CSV-like data) into a table.
 - **AssocArrayAdapter** &mdash; Uses associative arrays where the keys become the table headers.
 - **MysqliResultAdapter** &mdash; Transforms a MySQLi result object into a table.
-- **DoctrineORMAdapter** &mdash; Converts Doctrine ORM result sets.
-- **DoctrineDBALAdapter** &mdash; Converts Doctrine DBAL query results.
+<!-- - **DoctrineORMAdapter** &mdash; Converts Doctrine ORM result sets. -->
+<!-- - **DoctrineDBALAdapter** &mdash; Converts Doctrine DBAL query results. -->
 
 ### Example: Using a MySQLi Adapter
 
