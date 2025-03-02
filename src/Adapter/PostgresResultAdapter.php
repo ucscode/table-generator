@@ -8,6 +8,8 @@ use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 
+// This Adapter has not been properly developed.
+// Working on it
 class PostgresResultAdapter extends AbstractAdapter
 {
     protected \PgSql\Result $result;
@@ -25,7 +27,10 @@ class PostgresResultAdapter extends AbstractAdapter
         for ($i = 0; $i < $numFields; $i++) {
             $columnName = pg_field_name($this->result, $i);
             $cell = new Th();
-            $cell->getMeta()->set('cellValue', $columnName);
+            $cell->getMeta()
+                ->set('originalValue', $columnName)
+                ->set('columnName', $columnName)
+            ;
             $cell->setData(ucwords(str_replace('_', ' ', $columnName)));
             $thead->addCell($cell);
         }
@@ -35,14 +40,25 @@ class PostgresResultAdapter extends AbstractAdapter
 
     public function getTbodyTrCollection(): TrCollection
     {
+        $headTr = $this->getTheadTr();
         $tbodyRows = new TrCollection();
 
         while ($row = pg_fetch_assoc($this->result)) {
             $tr = new Tr();
 
-            foreach ($row as $value) {
+            foreach (array_values($row) as $key => $value) {
+                /**
+                 * Get Th that matches the same index as the Td
+                 * @var ?Th $headerCell
+                 */
+                $headerCell = $headTr->getCellCollection()->get($key);
+
                 $cell = new Td($value);
-                $cell->getMeta()->set('cellValue', $value);
+                $cell->getMeta()
+                    ->set('originalValue', $value)
+                    ->set('columnName', $headerCell?->getMeta()->get('columnName'))
+                ;
+
                 $tr->addCell($cell);
             }
 

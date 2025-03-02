@@ -9,6 +9,8 @@ use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 
+// This Adapter has not been properly developed.
+// Working on it
 class DoctrineDBALAdapter extends AbstractAdapter
 {
     protected array $data;

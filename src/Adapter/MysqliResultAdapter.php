@@ -22,7 +22,10 @@ class MysqliResultAdapter extends AbstractAdapter
         if ($firstRow = $this->data->fetch_assoc()) {
             foreach (array_keys($firstRow) as $columnName) {
                 $cell = new Th();
-                $cell->getMeta()->set('cellValue', $columnName);
+                $cell->getMeta()
+                    ->set('originalValue', $columnName)
+                    ->set('columnName', $columnName)
+                ;
                 $cell->setData(ucwords(str_replace('_', ' ', $columnName)));
                 $thead->addCell($cell);
             }
@@ -33,6 +36,7 @@ class MysqliResultAdapter extends AbstractAdapter
 
     public function getTbodyTrCollection(): TrCollection
     {
+        $headTr = $this->getTheadTr();
         $tbodyRows = new TrCollection();
 
         $this->data->data_seek($this->paginator->getCurrentPageOffset());
@@ -46,9 +50,19 @@ class MysqliResultAdapter extends AbstractAdapter
 
             $tr = new Tr();
 
-            foreach ($row as $value) {
+            foreach (array_values($row) as $key => $value) {
+                /**
+                 * Get Th that matches the same index as the Td
+                 * @var ?Th $headerCell
+                 */
+                $headerCell = $headTr->getCellCollection()->get($key);
+
                 $cell = new Td($value);
-                $cell->getMeta()->set('cellValue', $value);
+                $cell->getMeta()
+                    ->set('originalValue', $value)
+                    ->set('columnName', $headerCell?->getMeta()->get('columnName'))
+                ;
+
                 $tr->addCell($cell);
             }
 

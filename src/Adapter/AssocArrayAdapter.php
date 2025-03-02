@@ -21,7 +21,10 @@ class AssocArrayAdapter extends AbstractAdapter
 
         foreach (array_keys($this->data[0]) as $value) {
             $cell = new Th();
-            $cell->getMeta()->set('cellValue', $value);
+            $cell->getMeta()
+                ->set('originalValue', $value)
+                ->set('columnName', $value)
+            ;
             $cell->setData(ucwords(str_replace('_', ' ', $value)));
             $thead->addCell($cell);
         }
@@ -31,20 +34,31 @@ class AssocArrayAdapter extends AbstractAdapter
 
     public function getTbodyTrCollection(): TrCollection
     {
+        $headTr = $this->getTheadTr();
         $tbodyRows = new TrCollection();
-
+        
         $data = array_slice(
             $this->data,
             $this->paginator->getCurrentPageOffset(),
             $this->paginator->getItemsPerPage(),
         );
-
+        
         foreach ($data as $row) {
             $tr = new Tr();
 
-            foreach ($row as $value) {
+            foreach (array_values($row) as $key => $value) {
+                /**
+                 * Get Th that matches the same index as the Td
+                 * @var ?Th $headerCell
+                 */
+                $headerCell = $headTr->getCellCollection()->get($key);
+
                 $cell = new Td($value);
-                $cell->getMeta()->set('cellValue', $value);
+                $cell->getMeta()
+                    ->set('originalValue', $value)
+                    ->set('columnName', $headerCell?->getMeta()->get('columnName'))
+                ;
+                
                 $tr->addCell($cell);
             }
 

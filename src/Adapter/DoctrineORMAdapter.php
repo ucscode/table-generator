@@ -10,6 +10,8 @@ use Ucscode\HtmlComponent\TableGenerator\Component\Section\Td;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Th;
 use Ucscode\HtmlComponent\TableGenerator\Component\Section\Tr;
 
+// This adapter has not been properly developed
+// Working on it
 class DoctrineORMAdapter extends AbstractAdapter
 {
     protected array $data;
