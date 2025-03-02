@@ -26,7 +26,8 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
-        "phpunit/phpunit": "^10"
+        "phpunit/phpunit": "^10",
+        "phpstan/phpstan": "^2.1"
     },
     "scripts": {
         "test": "vendor/bin/phpunit --display-deprecations --display-warnings --display-notices --display-phpunit-deprecations"

@@ -22,6 +22,19 @@ class CsvArrayAdapterTest extends TestCase
         [8, 'David Anderson', 35, 'david.anderson@example.com', 'Italy'],
     ];
 
+    public static function paginatorProvider(): array
+    {
+        return [
+            [null, 8, [1, 'John Doe']],
+            [new Paginator(), 8, [1, 'John Doe']],
+            [new Paginator(0, 2, 1), 2, [1, 'John Doe']],
+            [new Paginator(0, 2, 2), 2, [3, 'Alice Johnson']],
+            [new Paginator(0, 3, 2), 3, [4, 'Robert Brown']],
+            [new Paginator(0, 7, 2), 1, [8, 'David Anderson']],
+            [new Paginator(0, 5, 2), 3, [6, 'Michael Wilson']],
+        ];
+    }
+
     #[DataProvider('paginatorProvider')]
     public function testCsvArrayAdapter(?Paginator $paginator, int $trItemsCount, array $data): void
     {
@@ -34,17 +47,19 @@ class CsvArrayAdapterTest extends TestCase
         $this->assertSame($csvAdapter->getTbodyTrCollection()->get(0)?->getCell(0)?->getData(), $data[0]);
         $this->assertSame($csvAdapter->getTbodyTrCollection()->get(0)?->getCell(1)?->getData(), $data[1]);
     }
-
-    public static function paginatorProvider(): array
+    
+    public function testColumnNames(): void
     {
-        return [
-            [null, 8, [1, 'John Doe']],
-            [new Paginator(), 8, [1, 'John Doe']],
-            [new Paginator(0, 2, 1), 2, [1, 'John Doe']],
-            [new Paginator(0, 2, 2), 2, [3, 'Alice Johnson']],
-            [new Paginator(0, 3, 2), 3, [4, 'Robert Brown']],
-            [new Paginator(0, 7, 2), 1, [8, 'David Anderson']],
-            [new Paginator(0, 5, 2), 3, [6, 'Michael Wilson']],
-        ];
+        $assocAdapter = new CsvArrayAdapter(self::CSV_DATA);
+        $columns = self::CSV_DATA[0];
+
+        foreach ($assocAdapter->getTbodyTrCollection() as $tr) {
+            foreach ($tr->getCellCollection() as $key => $cell) {
+                $this->assertSame(
+                    $columns[$key],
+                    $cell->getMeta()->get('columnName')
+                );
+            }
+        }
     }
 }

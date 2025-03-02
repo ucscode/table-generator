@@ -69,6 +69,19 @@ class AssocArrayAdapterTest extends TestCase
         ],
     ];
 
+    public static function paginatorProvider(): array
+    {
+        return [
+            [null, 8, [1, 'John Doe']],
+            [new Paginator(), 8, [1, 'John Doe']],
+            [new Paginator(0, 2, 1), 2, [1, 'John Doe']],
+            [new Paginator(0, 2, 2), 2, [3, 'Alice Johnson']],
+            [new Paginator(0, 3, 2), 3, [4, 'Robert Brown']],
+            [new Paginator(0, 7, 2), 1, [8, 'David Anderson']],
+            [new Paginator(0, 5, 2), 3, [6, 'Michael Wilson']],
+        ];
+    }
+
     #[DataProvider('paginatorProvider')]
     public function testAssocArrayAdapter(?Paginator $paginator, int $trItemsCount, array $data): void
     {
@@ -82,16 +95,18 @@ class AssocArrayAdapterTest extends TestCase
         $this->assertSame($assocAdapter->getTbodyTrCollection()->get(0)?->getCell(1)?->getData(), $data[1]);
     }
 
-    public static function paginatorProvider(): array
+    public function testColumnNames(): void
     {
-        return [
-            [null, 8, [1, 'John Doe']],
-            [new Paginator(), 8, [1, 'John Doe']],
-            [new Paginator(0, 2, 1), 2, [1, 'John Doe']],
-            [new Paginator(0, 2, 2), 2, [3, 'Alice Johnson']],
-            [new Paginator(0, 3, 2), 3, [4, 'Robert Brown']],
-            [new Paginator(0, 7, 2), 1, [8, 'David Anderson']],
-            [new Paginator(0, 5, 2), 3, [6, 'Michael Wilson']],
-        ];
+        $assocAdapter = new AssocArrayAdapter(self::ASSOC_DATA);
+        $columns = array_keys(self::ASSOC_DATA[0]);
+
+        foreach ($assocAdapter->getTbodyTrCollection() as $tr) {
+            foreach ($tr->getCellCollection() as $key => $cell) {
+                $this->assertSame(
+                    $columns[$key],
+                    $cell->getMeta()->get('columnName')
+                );
+            }
+        }
     }
 }
