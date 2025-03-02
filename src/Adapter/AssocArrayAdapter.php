@@ -36,13 +36,13 @@ class AssocArrayAdapter extends AbstractAdapter
     {
         $headTr = $this->getTheadTr();
         $tbodyRows = new TrCollection();
-        
+
         $data = array_slice(
             $this->data,
             $this->paginator->getCurrentPageOffset(),
             $this->paginator->getItemsPerPage(),
         );
-        
+
         foreach ($data as $row) {
             $tr = new Tr();
 
@@ -58,7 +58,7 @@ class AssocArrayAdapter extends AbstractAdapter
                     ->set('originalValue', $value)
                     ->set('columnName', $headerCell?->getMeta()->get('columnName'))
                 ;
-                
+
                 $tr->addCell($cell);
             }
 

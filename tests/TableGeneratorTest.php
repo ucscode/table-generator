@@ -20,7 +20,10 @@ class TableGeneratorTest extends TestCase
     {
         $htmlTableGenerator = new TableGenerator(new CsvArrayAdapter([]));
 
-        $this->assertSame($htmlTableGenerator->render(), '<table></table>');
+        $this->assertSame(
+            '<table></table>',
+            $htmlTableGenerator->render()
+        );
     }
 
     public function testHtmlTableTheadOutput(): void
@@ -28,8 +31,11 @@ class TableGeneratorTest extends TestCase
         $htmlTableGenerator = new TableGenerator(new CsvArrayAdapter([
             ['id', 'name']
         ]));
-
-        $this->assertSame($htmlTableGenerator->render(), '<table><thead><tr><th>id</th><th>name</th></tr></thead></table>');
+        
+        $this->assertSame(
+            '<table><thead><tr><th>Id</th><th>Name</th></tr></thead></table>',
+            $htmlTableGenerator->render()
+        );
     }
 
     public function testHtmlTableTheadTbodyOutput(): void
@@ -39,7 +45,10 @@ class TableGeneratorTest extends TestCase
             [2, 'extra']
         ]));
 
-        $this->assertSame($htmlTableGenerator->render(), '<table><thead><tr><th>id</th></tr></thead><tbody><tr><td>2</td><td>extra</td></tr></tbody></table>');
+        $this->assertSame(
+            '<table><thead><tr><th>Id</th></tr></thead><tbody><tr><td>2</td><td>extra</td></tr></tbody></table>',
+            $htmlTableGenerator->render()
+        );
     }
 
     public function testHtmlTableTheadTfootOutput(): void
@@ -50,7 +59,10 @@ class TableGeneratorTest extends TestCase
 
         $htmlTableGenerator->setTfootEnabled(true)->regenerate();
 
-        $this->assertSame($htmlTableGenerator->render(), '<table><thead><tr><th>id</th></tr></thead><tfoot><tr><th>id</th></tr></tfoot></table>');
+        $this->assertSame(
+            '<table><thead><tr><th>Id</th></tr></thead><tfoot><tr><th>Id</th></tr></tfoot></table>',
+            $htmlTableGenerator->render()
+        );
     }
 
     public function testHtmlTableMiddleware(): void
@@ -79,7 +91,10 @@ class TableGeneratorTest extends TestCase
 
         $htmlTableGenerator->setTfootEnabled(true)->regenerate();
 
-        $this->assertSame($htmlTableGenerator->render(), '<table class="block-buster"><thead><tr><th>id</th></tr></thead><tfoot><tr><th>transform</th><th>action</th></tr></tfoot></table>');
+        $this->assertSame(
+            '<table class="block-buster"><thead><tr><th>Id</th></tr></thead><tfoot><tr><th>transform</th><th>action</th></tr></tfoot></table>',
+            $htmlTableGenerator->render()
+        );
     }
 
     public function testHtmlTableWithMultipleMiddlewares(): void
@@ -136,12 +151,12 @@ class TableGeneratorTest extends TestCase
         $this->assertSame($middlewareCollection->get(1), $inlinerMiddleware);
         $this->assertSame($middlewareCollection->last(), $actionMiddleware);
 
-        $theadTr = '<tr><td>[x]</td><th>id</th><td>inline</td><th>username</th><td>action</td></tr>';
+        $theadTr = '<tr><td>[x]</td><th>Id</th><td>inline</td><th>Username</th><td>action</td></tr>';
         $tbodyTr = '<tr><td>[x]</td><td>1</td><td>inline</td><td>johndoe</td><td>action</td></tr>';
         $tbodyTr2 = '<tr><td>[x]</td><td>3</td><td>inline</td><td>sammy</td><td>action</td></tr>';
 
         $formation = sprintf('<table><thead>%s</thead><tbody>%s%s</tbody></table>', $theadTr, $tbodyTr, $tbodyTr2);
-
+        
         $this->assertNotSame($formation, $tableGenerator->render());
 
         $tableGenerator->regenerate(); //
